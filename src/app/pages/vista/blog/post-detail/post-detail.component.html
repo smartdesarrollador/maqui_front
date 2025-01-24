@@ -1,0 +1,72 @@
+<div class="flex flex-wrap gap-4 justify-center my-4">
+  <!-- Mostrar el nombre de la categoría -->
+
+  <br />
+  <button
+    routerLink="/blog"
+    class="border border-blue-400 text-blue-400 font-semibold py-2 px-4 rounded-full hover:bg-blue-500 hover:text-white transition-colors duration-300 ease-in-out block"
+  >
+    <svg
+      class="w-6 h-6 text-blue-500 font-bold hover:text-white inline"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 12h14M5 12l4-4m-4 4 4 4"
+      />
+    </svg>
+    <span class="inline">Blog</span>
+  </button>
+</div>
+
+<div class="container mx-auto max-w-7xl">
+  <!-- Mostrar el detalle del post solo si existe -->
+  <div *ngIf="post">
+    <!-- Título del post -->
+    <div class="bg-white shadow-lg my-10 mx-2 md:mx-10 rounded-lg p-4 md:px-20">
+      <h1 class="text-3xl font-bold mb-4">{{ post.titulo }}</h1>
+
+      <!-- Información del autor y fecha de publicación -->
+      <div class="flex items-center mb-6">
+        <img
+          src="https://via.placeholder.com/50"
+          alt="{{ post.autor?.nombre }}"
+          class="w-12 h-12 rounded-full mr-4"
+        />
+        <div>
+          <p class="text-lg font-semibold">{{ post.autor?.nombre }}</p>
+          <p class="text-sm text-gray-600">
+            {{ post.fecha_publicacion | date : "dd MMMM y" }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Imagen destacada del post -->
+      <img
+        [src]="urlRaiz + post.ruta_imagen"
+        alt="Imagen del post"
+        class="lg:w-full lg:h-[500px] object-cover mb-6"
+      />
+
+      <!-- Contenido del post -->
+      <!-- <p class="text-gray-700 leading-relaxed mb-4">{{ post.contenido }}</p> -->
+      <!--   <div class="ql-container ql-snow" style="border-width: 0">
+        <div class="ql-editor" [innerHTML]="safeHtml"></div>
+      </div> -->
+
+      <div class="ql-container ql-snow" style="border-width: 0">
+        <div class="ql-editor ql-container" [innerHTML]="safeHtml"></div>
+      </div>
+
+      <app-comment-form [postId]="postId"></app-comment-form>
+    </div>
+  </div>
+</div>

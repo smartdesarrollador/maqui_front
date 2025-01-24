@@ -1,0 +1,74 @@
+<div class="container mx-auto my-8">
+  <div *ngFor="let categoria of categorias">
+    <h2 class="text-2xl font-bold mb-4">{{ categoria.varchar1 }}</h2>
+    <div
+      *ngIf="
+        categoria.registros && categoria.registros.length > 0;
+        else noRegistros
+      "
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          *ngFor="let registro of categoria.registros"
+          class="bg-white border border-gray-300 rounded-lg p-4 shadow hover:shadow-lg transition duration-300"
+        >
+          <div class="flex justify-center">
+            <img
+              [src]="dominio + '/' + registro.varchar7"
+              alt="{{ registro.varchar1 }}"
+              class="h-48 object-cover rounded-md mb-4"
+            />
+          </div>
+          <h3 class="text-lg font-bold">{{ registro.varchar1 }}</h3>
+          <p class="text-gray-600">{{ registro.varchar2 }}</p>
+          <p class="text-gray-600">{{ registro.varchar3 }}</p>
+          <button
+            (click)="selectRecord(registro)"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Leer más
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noRegistros>
+      <p class="text-gray-600">
+        No hay registros disponibles para esta categoría.
+      </p>
+    </ng-template>
+  </div>
+
+  <!-- Modal -->
+  <div
+    *ngIf="selectedRecord"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  >
+    <div
+      class="bg-white w-11/12 md:w-1/2 lg:w-1/3 p-6 rounded shadow-lg relative"
+    >
+      <button
+        (click)="closeModal()"
+        class="absolute top-2 right-2 text-gray-600 hover:text-black"
+      >
+        &times;
+      </button>
+
+      <div class="flex items-start">
+        <img
+          [src]="dominio + '/' + selectedRecord.varchar7"
+          alt="{{ selectedRecord.varchar1 }}"
+          class="w-32 h-32 object-cover rounded-full mb-4"
+        />
+        <div class="ml-6">
+          <h3 class="text-xl font-bold">{{ selectedRecord.varchar1 }}</h3>
+          <p class="text-gray-600">{{ selectedRecord.varchar2 }}</p>
+          <p class="text-gray-600">{{ selectedRecord.varchar3 }}</p>
+        </div>
+      </div>
+
+      <div class="ql-container ql-snow" style="border-width: 0">
+        <div class="ql-editor ql-container" [innerHTML]="safeHtml"></div>
+      </div>
+    </div>
+  </div>
+</div>

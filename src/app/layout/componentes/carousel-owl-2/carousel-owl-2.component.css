@@ -1,0 +1,34 @@
+/* .custom-nav-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: red;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.prev {
+  left: -20px; 
+}
+
+.next {
+  right: -20px; 
+}
+
+.owl-nav {
+  display: flex !important;
+}
+.owl-nav button {
+  visibility: visible !important;
+}
+
+.owl-nav {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+ */
