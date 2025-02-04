@@ -1,0 +1,118 @@
+<!-- Barra de navegación superior -->
+<nav class="bg-black fixed w-full top-0 z-[1000]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo JCH -->
+      <div class="flex-shrink-0">
+        <img class="h-8 w-auto" src="assets/images/logo-jch.png" alt="JCH" />
+      </div>
+
+      <!-- Menú central -->
+      <div class="flex-1 flex items-center justify-center">
+        <div class="relative">
+          <button
+            (click)="toggleMenu()"
+            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2"
+          >
+            <span>Elige una moto</span>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menú derecho -->
+      <div class="flex items-center space-x-4">
+        <a
+          href="#"
+          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          >Accesorios</a
+        >
+        <a
+          href="#"
+          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          >Post Venta</a
+        >
+        <a
+          href="#"
+          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          >Comparador</a
+        >
+        <a
+          href="#"
+          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          >Concesionarios</a
+        >
+        <button
+          class="bg-orange-500 text-white px-4 py-2 rounded-md text-sm font-medium"
+        >
+          Financiamiento
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Menú desplegable de motos -->
+@if (mostrarMenu()) {
+<div class="fixed inset-x-0 top-16 bg-white shadow-lg z-[999]">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Pestañas de tipos de motos -->
+    <div class="flex space-x-4 border-b mb-6">
+      @for (tipo of tiposMotos(); track tipo.id) {
+      <button
+        (click)="seleccionarTipo(tipo.nombre)"
+        [class.text-orange-500]="tipoSeleccionado() === tipo.nombre"
+        [class.border-orange-500]="tipoSeleccionado() === tipo.nombre"
+        class="px-4 py-2 text-sm font-medium hover:text-orange-500 border-b-2 border-transparent hover:border-orange-500 transition-colors"
+      >
+        {{ tipo.nombre }}
+      </button>
+      }
+    </div>
+
+    <!-- Grid de motos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (tipo of tiposMotos(); track tipo.id) { @if (tipoSeleccionado() ===
+      tipo.nombre) { @for (moto of tipo.motos; track moto.id) {
+      <div
+        class="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+      >
+        <div class="aspect-w-3 aspect-h-2 overflow-hidden rounded-t-lg">
+          <img
+            [src]="moto.imagen"
+            [alt]="moto.nombre"
+            class="h-48 w-full object-cover object-center group-hover:opacity-75 transition-opacity"
+          />
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-medium text-gray-900">{{ moto.nombre }}</h3>
+          <p class="text-sm text-gray-500">{{ moto.marca }}</p>
+          <div class="mt-2 flex items-center justify-between">
+            <p class="text-lg font-bold text-orange-500">
+              S/ {{ moto.precio }}
+            </p>
+            <button
+              class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
+            >
+              Ver más
+            </button>
+          </div>
+        </div>
+      </div>
+      } } }
+    </div>
+  </div>
+</div>
+}

@@ -22,7 +22,7 @@ import { CarouselOwl1Component } from '../../layout/componentes/carousel-owl-1/c
 import { BotonWhatsappComponent } from '../../layout/componentes/boton-whatsapp/boton-whatsapp.component';
 import { NavbarStickyComponent } from '../../layout/componentes/navbar-sticky/navbar-sticky.component';
 import { FooterSimpleComponent } from '../../layout/componentes/footer-simple/footer-simple.component';
-
+import { MenuMotosComponent } from '../../layout/componentes/menu-motos/menu-motos.component';
 /* import * as AOS from 'aos'; */
 
 @Component({
@@ -49,8 +49,10 @@ import { FooterSimpleComponent } from '../../layout/componentes/footer-simple/fo
     BotonWhatsappComponent,
     NavbarStickyComponent,
     FooterSimpleComponent,
+    MenuMotosComponent,
   ],
   templateUrl: './vista.component.html',
+
   styleUrl: './vista.component.css',
 })
 export class VistaComponent implements OnInit {
