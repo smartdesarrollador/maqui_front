@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuMotoService } from '../../../services/services_motos/menu-moto.service';
+import { environment } from '../../../../environments/environment';
 
 interface Moto {
   id: number;
@@ -25,6 +26,7 @@ interface TipoMoto {
   styleUrls: ['./menu-motos.component.css'],
 })
 export class MenuMotosComponent {
+  protected readonly baseUrl = environment.urlRaiz;
   private menuMotoService = inject(MenuMotoService);
 
   tiposMotos = signal<TipoMoto[]>([]);

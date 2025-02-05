@@ -1,21 +1,16 @@
 import { Routes } from '@angular/router';
-
-import { LoginComponent } from './pages/login/login/login.component';
-import { RegisterComponent } from './pages/login/register/register.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 import { VistaComponent } from './pages/vista/vista.component';
 import { InicioComponent } from './pages/vista/inicio/inicio.component';
 
+/* import { LoginComponent } from './pages/login/login/login.component';
+import { RegisterComponent } from './pages/login/register/register.component';
 import { CursosComponent } from './pages/vista/cursos/cursos.component';
-
 import { AdminGuard } from './guards/admin.guard';
 import { EmpleadorGuard } from './guards/empleador.guard';
 import { TrabajadorGuard } from './guards/trabajador';
 import { AuthGuard } from './guards/auth.guard';
-
-/* ---------------------------------------------------------------------- */
-
 import { LayoutUnoComponent } from './layout/layout-uno/layout-uno.component';
 import { LayoutDosComponent } from './layout/layout-dos/layout-dos.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -36,7 +31,7 @@ import { RelacionesComponent } from './pages/vista/blog/relaciones/relaciones.co
 import { DesarrolloPersonalComponent } from './pages/vista/blog/desarrollo-personal/desarrollo-personal.component';
 import { TipsPsicologicosComponent } from './pages/vista/blog/tips-psicologicos/tips-psicologicos.component';
 import { PostByCategoryComponent } from './pages/vista/blog/post-by-category/post-by-category.component';
-import { PostDetailComponent } from './pages/vista/blog/post-detail/post-detail.component';
+import { PostDetailComponent } from './pages/vista/blog/post-detail/post-detail.component'; */
 import { Componente1Component } from './pages/vista/componente1/componente1.component';
 
 export const routes: Routes = [
@@ -63,76 +58,165 @@ export const routes: Routes = [
       },
       {
         path: 'que-es-kalma',
-        component: MisionVisionComponent,
+        //component: MisionVisionComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/nosotros/mision-vision/mision-vision.component'
+          ).then((m) => m.MisionVisionComponent),
       },
+
       {
         path: 'equipo-kalma',
-        component: EquipoComponent,
+        //component: EquipoComponent,
+        loadComponent: () =>
+          import('./pages/vista/nosotros/equipo/equipo.component').then(
+            (m) => m.EquipoComponent
+          ),
       },
+
       {
         path: 'informacion',
-        component: InformacionComponent,
+        //component: InformacionComponent,
+        loadComponent: () =>
+          import('./pages/vista/informacion/informacion.component').then(
+            (m) => m.InformacionComponent
+          ),
       },
+
       {
         path: 'contactanos',
-        component: ContactoComponent,
+        //component: ContactoComponent,
+        loadComponent: () =>
+          import('./pages/vista/contacto/contacto.component').then(
+            (m) => m.ContactoComponent
+          ),
       },
+
       {
         path: 'blog',
-        component: BlogComponent,
+        //component: BlogComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/blog.component').then(
+            (m) => m.BlogComponent
+          ),
       },
+
       {
         path: 'blog/ansiedad',
-        component: AnsiedadComponent,
+        //component: AnsiedadComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/ansiedad/ansiedad.component').then(
+            (m) => m.AnsiedadComponent
+          ),
       },
+
       {
         path: 'blog/depresion',
-        component: DepresionComponent,
+        //component: DepresionComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/depresion/depresion.component').then(
+            (m) => m.DepresionComponent
+          ),
       },
+
       {
         path: 'blog/estres',
-        component: EstresComponent,
+        //component: EstresComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/estres/estres.component').then(
+            (m) => m.EstresComponent
+          ),
       },
+
       {
         path: 'blog/transtornos-de-personalidad',
-        component: TranstornosDePersonalidadComponent,
+        //component: TranstornosDePersonalidadComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/blog/transtornos-de-personalidad/transtornos-de-personalidad.component'
+          ).then((m) => m.TranstornosDePersonalidadComponent),
       },
+
       {
         path: 'blog/estados-de-animo',
-        component: EstadosDeAnimoComponent,
+        //component: EstadosDeAnimoComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/blog/estados-de-animo/estados-de-animo.component'
+          ).then((m) => m.EstadosDeAnimoComponent),
       },
+
       {
         path: 'blog/relaciones',
-        component: RelacionesComponent,
+        //component: RelacionesComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/relaciones/relaciones.component').then(
+            (m) => m.RelacionesComponent
+          ),
       },
+
       {
         path: 'blog/desarrollo-personal',
-        component: DesarrolloPersonalComponent,
+        //component: DesarrolloPersonalComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/blog/desarrollo-personal/desarrollo-personal.component'
+          ).then((m) => m.DesarrolloPersonalComponent),
       },
+
       {
         path: 'blog/tips-psicologicos',
-        component: TipsPsicologicosComponent,
+        //component: TipsPsicologicosComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/blog/tips-psicologicos/tips-psicologicos.component'
+          ).then((m) => m.TipsPsicologicosComponent),
       },
+
       {
         path: 'blog/post/categorie/:id',
-        component: PostByCategoryComponent,
+        //component: PostByCategoryComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/blog/post-by-category/post-by-category.component'
+          ).then((m) => m.PostByCategoryComponent),
       },
+
       {
         path: 'blog/posts/detail/:id',
-        component: PostDetailComponent,
+        //component: PostDetailComponent,
+        loadComponent: () =>
+          import('./pages/vista/blog/post-detail/post-detail.component').then(
+            (m) => m.PostDetailComponent
+          ),
       },
       { path: 'nuestro-equipo', component: Componente1Component },
+
       {
         path: 'servicio1',
-        component: CursosComponent,
+        //component: CursosComponent,
+        loadComponent: () =>
+          import('./pages/vista/cursos/cursos.component').then(
+            (m) => m.CursosComponent
+          ),
       },
+
       {
         path: 'servicio2',
-        component: EspecialidadesComponent,
+        //component: EspecialidadesComponent,
+        loadComponent: () =>
+          import('./pages/vista/especialidades/especialidades.component').then(
+            (m) => m.EspecialidadesComponent
+          ),
       },
+
       {
         path: 'detalle',
-        component: DetalleCursoComponent,
+        //component: DetalleCursoComponent,
+        loadComponent: () =>
+          import('./pages/vista/detalle-curso/detalle-curso.component').then(
+            (m) => m.DetalleCursoComponent
+          ),
       },
     ],
   },

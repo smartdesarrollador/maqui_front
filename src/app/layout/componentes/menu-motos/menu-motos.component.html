@@ -4,7 +4,11 @@
     <div class="flex items-center justify-between h-16">
       <!-- Logo JCH -->
       <div class="flex-shrink-0">
-        <img class="h-8 w-auto" src="assets/images/logo-jch.png" alt="JCH" />
+        <img
+          class="h-8 w-auto"
+          src="assets/logo/logo-maquimotora-blanco.png"
+          alt="JCH"
+        />
       </div>
 
       <!-- Menú central -->
@@ -91,7 +95,7 @@
       >
         <div class="aspect-w-3 aspect-h-2 overflow-hidden rounded-t-lg">
           <img
-            [src]="moto.imagen"
+            [src]="baseUrl + '/' + moto.imagen"
             [alt]="moto.nombre"
             class="h-48 w-full object-cover object-center group-hover:opacity-75 transition-opacity"
           />
