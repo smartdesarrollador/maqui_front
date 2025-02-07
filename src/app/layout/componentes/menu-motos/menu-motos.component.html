@@ -59,7 +59,7 @@
           >Concesionarios</a
         >
         <button
-          class="bg-orange-500 text-white px-4 py-2 rounded-md text-sm font-medium"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium"
         >
           Financiamiento
         </button>
@@ -76,10 +76,10 @@
     <div class="flex space-x-4 border-b mb-6">
       @for (tipo of tiposMotos(); track tipo.id) {
       <button
-        (click)="seleccionarTipo(tipo.nombre)"
-        [class.text-orange-500]="tipoSeleccionado() === tipo.nombre"
-        [class.border-orange-500]="tipoSeleccionado() === tipo.nombre"
-        class="px-4 py-2 text-sm font-medium hover:text-orange-500 border-b-2 border-transparent hover:border-orange-500 transition-colors"
+        (mouseenter)="seleccionarTipo(tipo.nombre)"
+        [class.text-blue-500]="tipoSeleccionado() === tipo.nombre"
+        [class.border-blue-500]="tipoSeleccionado() === tipo.nombre"
+        class="px-4 py-2 text-sm font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
       >
         {{ tipo.nombre }}
       </button>
@@ -104,11 +104,9 @@
           <h3 class="text-lg font-medium text-gray-900">{{ moto.nombre }}</h3>
           <p class="text-sm text-gray-500">{{ moto.marca }}</p>
           <div class="mt-2 flex items-center justify-between">
-            <p class="text-lg font-bold text-orange-500">
-              S/ {{ moto.precio }}
-            </p>
+            <p class="text-lg font-bold text-blue-500">S/ {{ moto.precio }}</p>
             <button
-              class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
+              class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
             >
               Ver más
             </button>
