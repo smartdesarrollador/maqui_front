@@ -23,6 +23,7 @@ import { BotonWhatsappComponent } from '../../layout/componentes/boton-whatsapp/
 import { NavbarStickyComponent } from '../../layout/componentes/navbar-sticky/navbar-sticky.component';
 import { FooterSimpleComponent } from '../../layout/componentes/footer-simple/footer-simple.component';
 import { MenuMotosComponent } from '../../layout/componentes/menu-motos/menu-motos.component';
+import { FooterMotosComponent } from '../../layout/componentes/footer-motos/footer-motos.component';
 /* import * as AOS from 'aos'; */
 
 @Component({
@@ -50,6 +51,7 @@ import { MenuMotosComponent } from '../../layout/componentes/menu-motos/menu-mot
     NavbarStickyComponent,
     FooterSimpleComponent,
     MenuMotosComponent,
+    FooterMotosComponent,
   ],
   templateUrl: './vista.component.html',
 
