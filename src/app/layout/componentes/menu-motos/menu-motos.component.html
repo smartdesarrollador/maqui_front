@@ -1,26 +1,49 @@
 <!-- Barra de navegación superior -->
 <nav class="bg-black fixed w-full top-0 z-[1000]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo JCH -->
       <div class="flex-shrink-0">
         <img
-          class="h-8 w-auto"
+          class="h-8 md:h-10 w-auto"
           src="assets/logo/logo-maquimotora-blanco.png"
           alt="JCH"
         />
       </div>
 
-      <!-- Menú central -->
-      <div class="flex-1 flex items-center justify-center">
+      <!-- Botón menú hamburguesa para móvil -->
+      <div class="md:hidden">
+        <button
+          (click)="toggleMobileMenu()"
+          class="text-white p-2"
+          aria-label="Menu principal"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menú central - oculto en móvil -->
+      <div class="hidden md:flex md:flex-1 md:items-center md:justify-center">
         <div class="relative">
           <button
             (click)="toggleMenu()"
-            class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2"
+            class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium flex items-center space-x-3"
           >
             <span>Elige una moto</span>
             <svg
-              class="w-4 h-4"
+              class="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -36,50 +59,91 @@
         </div>
       </div>
 
-      <!-- Menú derecho -->
-      <div class="flex items-center space-x-4">
+      <!-- Menú derecho - oculto en móvil -->
+      <div class="hidden md:flex md:items-center md:space-x-6">
         <a
           href="#"
-          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium"
           >Accesorios</a
         >
         <a
           href="#"
-          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium"
           >Post Venta</a
         >
         <a
           href="#"
-          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium"
           >Comparador</a
         >
         <a
           href="#"
-          class="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+          class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium"
           >Concesionarios</a
         >
         <button
-          class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium"
+          class="bg-blue-500 text-white px-6 py-3 rounded-md text-base md:text-lg font-medium hover:bg-blue-600 transition-colors"
         >
           Financiamiento
         </button>
       </div>
     </div>
   </div>
+
+  <!-- Menú móvil -->
+  @if (mostrarMenuMovil()) {
+  <div class="md:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <button
+        (click)="toggleMenu()"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+      >
+        Elige una moto
+      </button>
+      <a
+        href="#"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium"
+        >Accesorios</a
+      >
+      <a
+        href="#"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium"
+        >Post Venta</a
+      >
+      <a
+        href="#"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium"
+        >Comparador</a
+      >
+      <a
+        href="#"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium"
+        >Concesionarios</a
+      >
+      <button
+        class="w-full bg-blue-500 text-white px-4 py-2 rounded-md text-base font-medium mt-2"
+      >
+        Financiamiento
+      </button>
+    </div>
+  </div>
+  }
 </nav>
 
 <!-- Menú desplegable de motos -->
 @if (mostrarMenu()) {
-<div class="fixed inset-x-0 top-16 bg-white shadow-lg z-[999]">
-  <div class="max-w-7xl mx-auto px-4 py-6">
+<div
+  class="fixed inset-x-0 top-20 bg-white shadow-lg z-[999] overflow-y-auto max-h-[calc(100vh-5rem)]"
+>
+  <div class="max-w-7xl mx-auto px-4 py-8">
     <!-- Pestañas de tipos de motos -->
-    <div class="flex space-x-4 border-b mb-6">
+    <div class="flex flex-wrap gap-3 border-b mb-8">
       @for (tipo of tiposMotos(); track tipo.id) {
       <button
         (mouseenter)="seleccionarTipo(tipo.nombre)"
         [class.text-blue-500]="tipoSeleccionado() === tipo.nombre"
         [class.border-blue-500]="tipoSeleccionado() === tipo.nombre"
-        class="px-4 py-2 text-sm font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
+        class="px-5 py-3 text-base md:text-lg font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
       >
         {{ tipo.nombre }}
       </button>
@@ -87,7 +151,9 @@
     </div>
 
     <!-- Grid de motos -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+    >
       @for (tipo of tiposMotos(); track tipo.id) { @if (tipoSeleccionado() ===
       tipo.nombre) { @for (moto of tipo.motos; track moto.id) {
       <div

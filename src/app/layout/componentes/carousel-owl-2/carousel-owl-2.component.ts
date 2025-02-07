@@ -31,32 +31,30 @@ export class CarouselOwl2Component implements OnInit {
 
   customOptions: OwlOptions = {
     loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
     navSpeed: 700,
-    margin: 0,
+    margin: 10,
     autoplay: true,
-    autoplayTimeout: 2000,
-    navText: [
-      '<div class="custom-nav-btn prev"><</div>',
-      '<div class="custom-nav-btn next">></div>',
-    ],
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    nav: false,
     responsive: {
       0: {
         items: 1,
+        margin: 0,
       },
-      400: {
-        items: 1,
-      },
-      740: {
+      576: {
         items: 2,
       },
-      940: {
+      768: {
+        items: 2,
+      },
+      992: {
         items: 3,
       },
     },
-    nav: true,
   };
 }

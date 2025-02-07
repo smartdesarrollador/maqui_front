@@ -32,6 +32,7 @@ export class MenuMotosComponent {
   tiposMotos = signal<TipoMoto[]>([]);
   mostrarMenu = signal<boolean>(false);
   tipoSeleccionado = signal<string>('');
+  private menuMovilVisible = signal(false);
 
   ngOnInit() {
     this.cargarMenuMotos();
@@ -60,5 +61,13 @@ export class MenuMotosComponent {
 
   seleccionarTipo(tipo: string) {
     this.tipoSeleccionado.set(tipo);
+  }
+
+  mostrarMenuMovil() {
+    return this.menuMovilVisible();
+  }
+
+  toggleMobileMenu() {
+    this.menuMovilVisible.update((value) => !value);
   }
 }
