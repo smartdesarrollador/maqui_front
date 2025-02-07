@@ -11,6 +11,7 @@ import { FooterSimpleComponent } from '../../../layout/componentes/footer-simple
 import { Feature2Component } from '../../../layout/componentes/feature-2/feature-2.component';
 import { Section1Component } from '../../../layout/componentes/section-1/section-1.component';
 import { SectionImagenesComponent } from '../../../layout/componentes/section-imagenes/section-imagenes.component';
+import { InfoMisionVisionComponent } from '../nosotros/mision-vision/info-mision-vision/info-mision-vision.component';
 
 @Component({
   selector: 'app-inicio',
@@ -27,6 +28,7 @@ import { SectionImagenesComponent } from '../../../layout/componentes/section-im
     Feature2Component,
     Section1Component,
     SectionImagenesComponent,
+    InfoMisionVisionComponent,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
