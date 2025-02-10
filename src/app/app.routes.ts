@@ -218,6 +218,14 @@ export const routes: Routes = [
             (m) => m.DetalleCursoComponent
           ),
       },
+      {
+        path: 'motos-por-tipo',
+        //component: MotosPorTipoComponent,
+        loadComponent: () =>
+          import('./pages/vista/motos-por-tipo/motos-por-tipo.component').then(
+            (m) => m.MotosPorTipoComponent
+          ),
+      },
     ],
   },
   /* {

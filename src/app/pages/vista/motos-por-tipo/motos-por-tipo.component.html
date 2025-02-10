@@ -1,0 +1,142 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Barra de navegación de tipos -->
+  <nav class="flex justify-center mb-8">
+    <ul class="flex flex-wrap gap-4 justify-center">
+      <li>
+        <button
+          class="px-4 py-2 rounded-lg transition-colors duration-200"
+          [class.bg-orange-500]="selectedTipo === ''"
+          [class.text-white]="selectedTipo === ''"
+          [class.bg-gray-100]="selectedTipo !== ''"
+          (click)="onTipoChange('')"
+        >
+          TODAS
+        </button>
+      </li>
+      @for (tipo of tiposMotos; track tipo.id_tipo_moto) {
+      <li>
+        <button
+          class="px-4 py-2 rounded-lg transition-colors duration-200"
+          [class.bg-orange-500]="selectedTipo === tipo.nombre"
+          [class.text-white]="selectedTipo === tipo.nombre"
+          [class.bg-gray-100]="selectedTipo !== tipo.nombre"
+          (click)="onTipoChange(tipo.nombre)"
+        >
+          {{ tipo.nombre }}
+          <span class="text-sm ml-1">({{ tipo.motos_count }})</span>
+        </button>
+      </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Barra de búsqueda -->
+  <div class="flex justify-center mb-8">
+    <div class="relative w-full max-w-xl">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="onSearch()"
+        placeholder="Buscar motos..."
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+      />
+      <button
+        (click)="onSearch()"
+        class="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1 bg-orange-500 text-white rounded-lg"
+      >
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <!-- Grid de motos -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    @for (moto of motos; track moto.id_moto) {
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <!-- Etiquetas -->
+      <div class="relative">
+        @if (moto.tipo_moto.nombre === 'NUEVA') {
+        <span
+          class="absolute top-2 right-2 bg-yellow-500 text-white px-2 py-1 rounded-lg text-sm"
+        >
+          Nuevo | Modelo 2024
+        </span>
+        } @if (moto.tipo_moto.nombre === 'TOP') {
+        <span
+          class="absolute top-2 left-2 bg-gray-800 text-white px-2 py-1 rounded-lg text-sm"
+        >
+          Top 5
+        </span>
+        }
+      </div>
+
+      <!-- Imagen -->
+      <img
+        [src]="moto.imagen"
+        [alt]="moto.modelo.nombre"
+        class="w-full h-48 object-cover"
+      />
+
+      <!-- Información -->
+      <div class="p-4">
+        <h3 class="text-xl font-bold mb-2">{{ moto.modelo.nombre }}</h3>
+        <p class="text-gray-600 mb-2">{{ moto.modelo.marca.nombre }}</p>
+        <p class="text-orange-500 font-bold">
+          {{ formatPrice(moto.precio_base) }}
+        </p>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Paginación -->
+  @if (totalPages > 1) {
+  <div class="flex justify-center mt-8">
+    <nav class="flex space-x-2">
+      <button
+        (click)="onPageChange(currentPage - 1)"
+        [disabled]="currentPage === 1"
+        class="px-3 py-1 rounded-lg"
+        [class.bg-gray-200]="currentPage === 1"
+        [class.bg-orange-500]="currentPage !== 1"
+        [class.text-white]="currentPage !== 1"
+      >
+        Anterior
+      </button>
+
+      @for (page of getPagesArray(); track page) {
+      <button
+        (click)="onPageChange(page)"
+        class="px-3 py-1 rounded-lg"
+        [class.bg-orange-500]="currentPage === page"
+        [class.text-white]="currentPage === page"
+      >
+        {{ page }}
+      </button>
+      }
+
+      <button
+        (click)="onPageChange(currentPage + 1)"
+        [disabled]="currentPage === totalPages"
+        class="px-3 py-1 rounded-lg"
+        [class.bg-gray-200]="currentPage === totalPages"
+        [class.bg-orange-500]="currentPage !== totalPages"
+        [class.text-white]="currentPage !== totalPages"
+      >
+        Siguiente
+      </button>
+    </nav>
+  </div>
+  }
+
+  <!-- Loading spinner -->
+  @if (isLoading) {
+  <div
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  >
+    <div
+      class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-orange-500"
+    ></div>
+  </div>
+  }
+</div>

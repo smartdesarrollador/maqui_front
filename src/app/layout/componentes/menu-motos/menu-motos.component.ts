@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuMotoService } from '../../../services/services_motos/menu-moto.service';
 import { environment } from '../../../../environments/environment';
-
+import { RouterModule } from '@angular/router';
 interface Moto {
   id: number;
   nombre: string;
@@ -21,7 +21,7 @@ interface TipoMoto {
 @Component({
   selector: 'app-menu-motos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './menu-motos.component.html',
   styleUrls: ['./menu-motos.component.css'],
 })
