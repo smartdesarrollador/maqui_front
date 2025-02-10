@@ -12,10 +12,12 @@ import { Feature2Component } from '../../../layout/componentes/feature-2/feature
 import { Section1Component } from '../../../layout/componentes/section-1/section-1.component';
 import { SectionImagenesComponent } from '../../../layout/componentes/section-imagenes/section-imagenes.component';
 import { InfoMisionVisionComponent } from '../nosotros/mision-vision/info-mision-vision/info-mision-vision.component';
-
+import { SaludoInfoComponent } from '../../../layout/componentes/saludo-info/saludo-info.component';
+import { SectionTiposMotosComponent } from '../../../layout/componentes/section-tipos-motos/section-tipos-motos.component';
 @Component({
   selector: 'app-inicio',
   standalone: true,
+
   imports: [
     Jumbotron1Component,
     CardInfoComponent,
@@ -29,6 +31,8 @@ import { InfoMisionVisionComponent } from '../nosotros/mision-vision/info-mision
     Section1Component,
     SectionImagenesComponent,
     InfoMisionVisionComponent,
+    SaludoInfoComponent,
+    SectionTiposMotosComponent,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',

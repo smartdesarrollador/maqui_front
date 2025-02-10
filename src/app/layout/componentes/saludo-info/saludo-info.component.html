@@ -1,0 +1,17 @@
+<section class="w-full max-w-7xl mx-auto px-4 py-16">
+  <h1 class="text-3xl font-bold text-center mb-12">
+    ¡HOLA MOTERO!, QUÉ DESEAS HACER HOY
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @for (card of infoCards; track card.titulo) {
+    <a
+      [routerLink]="card.ruta"
+      class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+    >
+      <img [src]="card.icono" [alt]="card.titulo" class="w-12 h-12 mb-4" />
+      <h2 class="text-lg font-semibold text-center">{{ card.titulo }}</h2>
+    </a>
+    }
+  </div>
+</section>
