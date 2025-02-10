@@ -137,49 +137,71 @@
 >
   <div class="max-w-7xl mx-auto px-4 py-8">
     <!-- Pestañas de tipos de motos -->
-    <div class="flex flex-wrap gap-3 border-b mb-8">
+    <div class="flex flex-wrap gap-6 border-b mb-8">
       @for (tipo of tiposMotos(); track tipo.id) {
       <button
         (mouseenter)="seleccionarTipo(tipo.nombre)"
         [class.text-blue-500]="tipoSeleccionado() === tipo.nombre"
         [class.border-blue-500]="tipoSeleccionado() === tipo.nombre"
-        class="px-5 py-3 text-base md:text-lg font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
+        class="px-8 py-3 text-base md:text-lg font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
       >
         {{ tipo.nombre }}
       </button>
       }
+      <button
+        (mouseenter)="seleccionarTipo('todas')"
+        [class.text-blue-500]="tipoSeleccionado() === 'todas'"
+        [class.border-blue-500]="tipoSeleccionado() === 'todas'"
+        class="px-8 py-3 text-base md:text-lg font-medium hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition-colors"
+      >
+        Ver todas
+      </button>
     </div>
 
     <!-- Grid de motos -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2"
     >
       @for (tipo of tiposMotos(); track tipo.id) { @if (tipoSeleccionado() ===
-      tipo.nombre) { @for (moto of tipo.motos; track moto.id) {
-      <div
-        class="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-      >
-        <div class="aspect-w-3 aspect-h-2 overflow-hidden rounded-t-lg">
-          <img
-            [src]="baseUrl + '/' + moto.imagen"
-            [alt]="moto.nombre"
-            class="h-48 w-full object-cover object-center group-hover:opacity-75 transition-opacity"
-          />
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-medium text-gray-900">{{ moto.nombre }}</h3>
-          <p class="text-sm text-gray-500">{{ moto.marca }}</p>
-          <div class="mt-2 flex items-center justify-between">
-            <p class="text-lg font-bold text-blue-500">S/ {{ moto.precio }}</p>
-            <button
-              class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              Ver más
-            </button>
+      tipo.nombre) {
+      <ng-container>
+        @for (moto of tipo.motos.slice(0,4); track moto.id) {
+        <div
+          class="group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow max-w-[200px]"
+        >
+          <div class="aspect-square overflow-hidden rounded-t-lg">
+            <img
+              [src]="baseUrl + '/' + moto.imagen"
+              [alt]="moto.nombre"
+              class="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
+            />
+          </div>
+          <div class="p-1.5">
+            <h3 class="text-sm font-medium text-gray-900">
+              {{ moto.nombre }}
+            </h3>
+            <p class="text-xs text-gray-500">{{ moto.marca }}</p>
+            <div class="mt-1 flex items-center justify-between">
+              <p class="text-xs font-bold text-blue-500">
+                S/ {{ moto.precio }}
+              </p>
+              <button
+                class="px-1.5 py-0.5 text-xs bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+              >
+                Ver más
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      } } }
+        } @if (tipo.motos.length > 4) {
+        <!--  <div class="col-span-full flex justify-center mt-4">
+          <span class="text-blue-500 cursor-pointer hover:underline">
+            Ver todas
+          </span>
+        </div> -->
+        }
+      </ng-container>
+      } }
     </div>
   </div>
 </div>
