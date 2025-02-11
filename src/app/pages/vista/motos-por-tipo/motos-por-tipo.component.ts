@@ -1,21 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import {
   MotosPorServicioService,
   Moto,
   TipoMoto,
 } from '../../../services/services_motos/motos-por-servicio.service';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-motos-por-tipo',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './motos-por-tipo.component.html',
   styleUrl: './motos-por-tipo.component.css',
 })
 export class MotosPorTipoComponent implements OnInit {
+  protected readonly baseUrl = environment.urlRaiz;
   private motoService = inject(MotosPorServicioService);
 
   motos: Moto[] = [];
