@@ -1,8 +1,16 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  ElementRef,
+  ViewChild,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuMotoService } from '../../../services/services_motos/menu-moto.service';
 import { environment } from '../../../../environments/environment';
 import { RouterModule } from '@angular/router';
+
 interface Moto {
   id: number;
   nombre: string;
@@ -26,6 +34,9 @@ interface TipoMoto {
   styleUrls: ['./menu-motos.component.css'],
 })
 export class MenuMotosComponent {
+  @ViewChild('menuContainer') menuContainer!: ElementRef;
+  @ViewChild('menuDesplegable') menuDesplegable!: ElementRef;
+
   protected readonly baseUrl = environment.urlRaiz;
   private menuMotoService = inject(MenuMotoService);
 
@@ -69,5 +80,28 @@ export class MenuMotosComponent {
 
   toggleMobileMenu() {
     this.menuMovilVisible.update((value) => !value);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickFuera(event: MouseEvent) {
+    if (this.mostrarMenu()) {
+      const clickEnMenuContainer = this.menuContainer?.nativeElement.contains(
+        event.target
+      );
+      const clickEnMenuDesplegable =
+        this.menuDesplegable?.nativeElement.contains(event.target);
+
+      if (!clickEnMenuContainer && !clickEnMenuDesplegable) {
+        this.cerrarMenu();
+      }
+    }
+  }
+
+  cerrarMenu() {
+    this.setMostrarMenu(false);
+  }
+
+  setMostrarMenu(value: boolean) {
+    this.mostrarMenu.set(value);
   }
 }

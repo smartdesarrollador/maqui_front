@@ -4,11 +4,13 @@
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo JCH -->
       <div class="flex-shrink-0">
-        <img
-          class="h-8 md:h-10 w-auto"
-          src="assets/logo/logo-maquimotora-blanco.png"
-          alt="JCH"
-        />
+        <a routerLink="/">
+          <img
+            class="h-8 md:h-10 w-auto"
+            src="assets/logo/logo-maquimotora-blanco.png"
+            alt="JCH"
+          />
+        </a>
       </div>
 
       <!-- Botón menú hamburguesa para móvil -->
@@ -36,7 +38,7 @@
 
       <!-- Menú central - oculto en móvil -->
       <div class="hidden md:flex md:flex-1 md:items-center md:justify-center">
-        <div class="relative">
+        <div class="relative" #menuContainer>
           <button
             (click)="toggleMenu()"
             class="text-white hover:bg-gray-700 px-4 py-3 rounded-md text-base md:text-lg font-medium flex items-center space-x-3"
@@ -133,6 +135,7 @@
 <!-- Menú desplegable de motos -->
 @if (mostrarMenu()) {
 <div
+  #menuDesplegable
   class="fixed inset-x-0 top-20 bg-white shadow-lg z-[999] overflow-y-auto max-h-[calc(100vh-5rem)]"
 >
   <div class="max-w-7xl mx-auto px-4 py-8">
@@ -140,6 +143,7 @@
     <div class="flex flex-wrap gap-6 border-b mb-8">
       @for (tipo of tiposMotos(); track tipo.id) {
       <button
+        routerLink="/motos-por-tipo"
         (mouseenter)="seleccionarTipo(tipo.nombre)"
         [class.text-blue-500]="tipoSeleccionado() === tipo.nombre"
         [class.border-blue-500]="tipoSeleccionado() === tipo.nombre"

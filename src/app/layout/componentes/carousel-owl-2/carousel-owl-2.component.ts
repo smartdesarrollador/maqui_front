@@ -5,11 +5,12 @@ import { Carousel } from '../../../models/carousel.model';
 import { CarouselService } from '../../../services/carousel.service';
 import { environment } from '../../../../environments/environment';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-carousel-owl-2',
   standalone: true,
-  imports: [CarouselModule, CommonModule],
+  imports: [CarouselModule, CommonModule, RouterModule],
   templateUrl: './carousel-owl-2.component.html',
   styleUrl: './carousel-owl-2.component.css',
 })
