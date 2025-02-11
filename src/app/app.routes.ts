@@ -226,6 +226,22 @@ export const routes: Routes = [
             (m) => m.MotosPorTipoComponent
           ),
       },
+      {
+        path: 'detalle-moto/:id',
+        //component: DetalleMotoComponent,
+        loadComponent: () =>
+          import('./pages/vista/detalle-moto/detalle-moto.component').then(
+            (m) => m.DetalleMotoComponent
+          ),
+      },
+      {
+        path: 'formulario-cotizacion',
+        //component: FormularioCotizacionComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/formulario-cotizacion/formulario-cotizacion.component'
+          ).then((m) => m.FormularioCotizacionComponent),
+      },
     ],
   },
   /* {

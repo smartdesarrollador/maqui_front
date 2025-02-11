@@ -7,6 +7,8 @@ import {
   TipoMoto,
 } from '../../../services/services_motos/motos-por-servicio.service';
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-motos-por-tipo',
   standalone: true,
@@ -17,6 +19,7 @@ import { environment } from '../../../../environments/environment';
 export class MotosPorTipoComponent implements OnInit {
   protected readonly baseUrl = environment.urlRaiz;
   private motoService = inject(MotosPorServicioService);
+  private router = inject(Router);
 
   motos: Moto[] = [];
   tiposMotos: TipoMoto[] = [];
@@ -97,5 +100,9 @@ export class MotosPorTipoComponent implements OnInit {
       style: 'currency',
       currency: 'PEN',
     }).format(price);
+  }
+
+  navigateToDetail(motoId: number): void {
+    this.router.navigate(['/detalle-moto', motoId]);
   }
 }

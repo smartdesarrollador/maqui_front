@@ -1,0 +1,325 @@
+<div class="container mx-auto px-6 md:px-12 lg:px-24 py-12">
+  <div class="bg-white rounded-lg shadow-xl p-8 border border-gray-200">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">
+      Déjanos tus datos para que un asesor se comunique contigo
+    </h2>
+
+    <form
+      [formGroup]="formularioCotizacion"
+      (ngSubmit)="onSubmit()"
+      class="space-y-8"
+    >
+      <!-- Tipo de moto y modelo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label
+            for="tipo_moto"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Tipo de moto</label
+          >
+          <select
+            id="tipo_moto"
+            formControlName="tipo_moto"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('tipo_moto')"
+          >
+            <option value="">Selecciona un tipo</option>
+            <option value="TODO TERRENO">TODO TERRENO</option>
+            <!-- Agregar más opciones según necesites -->
+          </select>
+          <span
+            *ngIf="esCampoInvalido('tipo_moto')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("tipo_moto") }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="modelo"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Modelo</label
+          >
+          <select
+            id="modelo"
+            formControlName="modelo"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('modelo')"
+          >
+            <option value="">Selecciona un modelo</option>
+            <option value="MONTANA 200">MONTANA 200</option>
+            <!-- Agregar más opciones según necesites -->
+          </select>
+          <span
+            *ngIf="esCampoInvalido('modelo')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("modelo") }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Nombres y Apellidos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label
+            for="nombres"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Nombres</label
+          >
+          <input
+            type="text"
+            id="nombres"
+            formControlName="nombres"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('nombres')"
+            placeholder="Ingresa tus nombres"
+          />
+          <span
+            *ngIf="esCampoInvalido('nombres')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("nombres") }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="apellidos"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Apellidos</label
+          >
+          <input
+            type="text"
+            id="apellidos"
+            formControlName="apellidos"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('apellidos')"
+            placeholder="Ingresa tus apellidos"
+          />
+          <span
+            *ngIf="esCampoInvalido('apellidos')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("apellidos") }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Celular y Correo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label
+            for="celular"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Celular</label
+          >
+          <input
+            type="tel"
+            id="celular"
+            formControlName="celular"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('celular')"
+            placeholder="Ingresa tu celular"
+          />
+          <span
+            *ngIf="esCampoInvalido('celular')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("celular") }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="correo_electronico"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Correo electrónico</label
+          >
+          <input
+            type="email"
+            id="correo_electronico"
+            formControlName="correo_electronico"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('correo_electronico')"
+            placeholder="Ingresa tu correo electrónico"
+          />
+          <span
+            *ngIf="esCampoInvalido('correo_electronico')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("correo_electronico") }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Documento -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-group">
+          <label
+            for="tipo_documento"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Tipo de documento</label
+          >
+          <select
+            id="tipo_documento"
+            formControlName="tipo_documento"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          >
+            <option value="DNI">DNI</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="numero_documento"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Número de documento</label
+          >
+          <input
+            type="text"
+            id="numero_documento"
+            formControlName="numero_documento"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('numero_documento')"
+            placeholder="Ingresa tu número de documento"
+          />
+          <span
+            *ngIf="esCampoInvalido('numero_documento')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("numero_documento") }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Ubicación -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="form-group">
+          <label
+            for="departamento"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Departamento</label
+          >
+          <select
+            id="departamento"
+            formControlName="departamento"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('departamento')"
+          >
+            <option value="">Selecciona departamento</option>
+            <!-- Agregar opciones de departamentos -->
+          </select>
+          <span
+            *ngIf="esCampoInvalido('departamento')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("departamento") }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="provincia"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Provincia</label
+          >
+          <select
+            id="provincia"
+            formControlName="provincia"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('provincia')"
+          >
+            <option value="">Selecciona provincia</option>
+            <!-- Agregar opciones de provincias -->
+          </select>
+          <span
+            *ngIf="esCampoInvalido('provincia')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("provincia") }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label
+            for="distrito"
+            class="block text-base font-medium mb-2 text-gray-700"
+            >Distrito</label
+          >
+          <select
+            id="distrito"
+            formControlName="distrito"
+            class="w-full p-3 border rounded-lg text-base focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            [class.border-red-500]="esCampoInvalido('distrito')"
+          >
+            <option value="">Selecciona distrito</option>
+            <!-- Agregar opciones de distritos -->
+          </select>
+          <span
+            *ngIf="esCampoInvalido('distrito')"
+            class="text-red-500 text-sm mt-1"
+          >
+            {{ obtenerMensajeError("distrito") }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Tiempo de compra -->
+      <div class="form-group">
+        <label class="block text-base font-medium mb-3 text-gray-700"
+          >¿Qué tan pronto deseas comprar tu moto?</label
+        >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          @for (opcion of opcionesTiempo; track opcion) {
+          <div class="flex items-center">
+            <input
+              type="radio"
+              [id]="opcion"
+              [value]="opcion"
+              formControlName="tiempo_compra"
+              class="mr-2"
+            />
+            <label [for]="opcion" class="text-sm">{{ opcion }}</label>
+          </div>
+          }
+        </div>
+        <span
+          *ngIf="esCampoInvalido('tiempo_compra')"
+          class="text-red-500 text-sm mt-1"
+        >
+          {{ obtenerMensajeError("tiempo_compra") }}
+        </span>
+      </div>
+
+      <!-- Mensajes de éxito/error -->
+      <div class="mt-6">
+        @if (mensajeExito) {
+        <div
+          class="p-4 bg-green-100 text-green-700 rounded-lg shadow-sm font-medium"
+        >
+          {{ mensajeExito }}
+        </div>
+        } @if (mensajeError) {
+        <div
+          class="p-4 bg-red-100 text-red-700 rounded-lg shadow-sm font-medium"
+        >
+          {{ mensajeError }}
+        </div>
+        }
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="flex justify-end pt-4">
+        <button
+          type="submit"
+          [disabled]="formularioCotizacion.invalid || enviando"
+          class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 disabled:bg-gray-400 shadow-md hover:shadow-lg transition-all duration-200"
+        >
+          {{ enviando ? "Enviando..." : "COTIZAR" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,238 @@
+<div class="container mx-auto px-4 py-16 my-16">
+  <!-- Loading State -->
+  @if (isLoading) {
+  <div class="flex justify-center items-center min-h-[400px]">
+    <div
+      class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
+    ></div>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (error) {
+  <div class="text-red-500 text-center p-4">
+    {{ error }}
+  </div>
+  }
+
+  <!-- Moto Details -->
+  @if (moto) {
+  <!-- Imagen principal y botones -->
+  <div class="grid md:grid-cols-2 gap-8 mb-8">
+    <div class="relative">
+      <img
+        [ngSrc]="baseUrl + '/' + moto.imagen"
+        [alt]="moto.modelo.nombre"
+        class="w-full h-auto rounded-lg shadow-lg transition duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+        width="600"
+        height="400"
+        priority
+      />
+    </div>
+    <div class="flex flex-col justify-center gap-4">
+      <h1 class="text-3xl font-bold mb-4">
+        {{ moto.modelo.marca.nombre }} {{ moto.modelo.nombre }}
+      </h1>
+      <p class="text-xl text-gray-600 mb-4">
+        Precio: S/. {{ moto.precio_base }}
+      </p>
+      <div class="flex gap-4">
+        <button
+          routerLink="/formulario-cotizacion"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+        >
+          Cotización
+        </button>
+        <button
+          class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
+        >
+          Financiación
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles principales -->
+  <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4">Características Principales</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="p-4 border rounded-lg">
+        <p class="font-semibold">Año</p>
+        <p>{{ moto.anio }}</p>
+      </div>
+      <div class="p-4 border rounded-lg">
+        <p class="font-semibold">Motor</p>
+        <p>{{ moto.motor }}</p>
+      </div>
+      <div class="p-4 border rounded-lg">
+        <p class="font-semibold">Cilindrada</p>
+        <p>{{ moto.cilindrada }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Especificaciones técnicas -->
+  <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-6">Especificaciones Técnicas</h2>
+
+    <!-- Tabla de Dimensiones y Peso -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800">
+        Dimensiones y Peso
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50 w-1/3"
+              >
+                Largo
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.largo }} mm
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Ancho
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.ancho }} mm
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Alto
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.alto }} mm
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Peso neto
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.peso_neto }} kg
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Carga útil
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.carga_util }} kg
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tabla de Sistema de Frenos -->
+    <div>
+      <h3 class="text-xl font-semibold mb-4 text-gray-800">
+        Sistema de Frenos
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50 w-1/3"
+              >
+                Freno delantero
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.freno_delantero }}
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Freno posterior
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.freno_posterior }}
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Neumático delantero
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.neumatico_delantero }}
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td
+                class="px-6 py-4 whitespace-nowrap font-medium text-gray-700 bg-gray-50"
+              >
+                Neumático posterior
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-gray-600">
+                {{ moto.neumatico_posterior }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Características adicionales -->
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <h2 class="text-2xl font-bold mb-4">Características Adicionales</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      @if (hasFeature(moto.cargador_usb)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Cargador USB</span>
+      </div>
+      } @if (hasFeature(moto.luz_led)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Luz LED</span>
+      </div>
+      } @if (hasFeature(moto.alarma)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Alarma</span>
+      </div>
+      } @if (hasFeature(moto.cajuela)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Cajuela</span>
+      </div>
+      } @if (hasFeature(moto.tablero_led)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Tablero LED</span>
+      </div>
+      } @if (hasFeature(moto.mp3)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>MP3</span>
+      </div>
+      } @if (hasFeature(moto.bluetooth)) {
+      <div class="flex items-center gap-2">
+        <span class="text-green-500">✓</span>
+        <span>Bluetooth</span>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>

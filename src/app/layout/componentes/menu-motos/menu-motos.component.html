@@ -191,6 +191,7 @@
                 S/ {{ moto.precio }}
               </p>
               <button
+                [routerLink]="['/detalle-moto', moto.id]"
                 class="px-1.5 py-0.5 text-xs bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
               >
                 Ver más
