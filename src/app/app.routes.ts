@@ -242,6 +242,14 @@ export const routes: Routes = [
             './pages/vista/formulario-cotizacion/formulario-cotizacion.component'
           ).then((m) => m.FormularioCotizacionComponent),
       },
+      {
+        path: 'aboutus',
+        //component: AboutusComponent,
+        loadComponent: () =>
+          import('./pages/vista/aboutus/aboutus.component').then(
+            (m) => m.AboutusComponent
+          ),
+      },
     ],
   },
   /* {

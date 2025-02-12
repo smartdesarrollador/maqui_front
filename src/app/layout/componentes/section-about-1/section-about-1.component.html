@@ -1,0 +1,23 @@
+<section class="about-section">
+  @if (cargando) {
+  <div class="loading">
+    <div
+      class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"
+    ></div>
+  </div>
+  } @else if (error) {
+  <div class="error-message">
+    {{ error }}
+  </div>
+  } @else if (imagen) {
+  <div class="about-content" style="display: flex; justify-content: center">
+    @if (medioFileService.esImagen(imagen.mime_type)) {
+    <img
+      [src]="baseUrl + '/' + imagen.file_path"
+      [alt]="imagen.alt_text || imagen.title"
+      class="about-image"
+    />
+    }
+  </div>
+  }
+</section>
