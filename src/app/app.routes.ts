@@ -258,6 +258,14 @@ export const routes: Routes = [
             './pages/vista/formulario-financiacion/formulario-financiacion.component'
           ).then((m) => m.FormularioFinanciacionComponent),
       },
+      {
+        path: 'post-venta',
+        //component: PostVentaComponent,
+        loadComponent: () =>
+          import('./pages/vista/post-venta/post-venta.component').then(
+            (m) => m.PostVentaComponent
+          ),
+      },
     ],
   },
   /* {

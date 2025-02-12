@@ -1,0 +1,108 @@
+<div class="bg-gray-900 py-16">
+  <div class="container mx-auto px-4">
+    <!-- Tabs de navegación -->
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <button
+        *ngFor="let tab of tabs"
+        (click)="activeTab = tab.id"
+        [class]="
+          'flex items-center px-6 py-3 rounded-lg transition-all duration-300 ' +
+          (activeTab === tab.id
+            ? 'bg-gray-800 text-yellow-400 shadow-lg shadow-yellow-400/20'
+            : 'bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-gray-200')
+        "
+      >
+        <span
+          [class]="
+            'mr-2 ' +
+            (activeTab === tab.id ? 'text-yellow-400' : 'text-gray-500')
+          "
+        >
+          <i [class]="tab.icon"></i>
+        </span>
+        {{ tab.title }}
+      </button>
+    </div>
+
+    <!-- Contenido de las tabs -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <!-- Imagen -->
+      <div class="relative">
+        <img
+          [src]="'assets/images/post-venta/' + activeTab + '.jpg'"
+          [alt]="getCurrentTab()?.title"
+          class="rounded-xl shadow-2xl w-full h-[400px] object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent rounded-xl"
+        ></div>
+      </div>
+
+      <!-- Contenido -->
+      <div class="space-y-8">
+        <h2 class="text-3xl font-bold text-white mb-6">
+          {{ getCurrentTab()?.title }}
+        </h2>
+
+        <!-- Cuidado de Motor -->
+        <div *ngIf="activeTab === 'cuidado-motor'" class="space-y-6">
+          <div
+            *ngFor="let item of motorCareItems; let i = index"
+            class="flex items-start space-x-4 bg-gray-800/50 p-4 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <span class="text-4xl font-bold text-yellow-400 opacity-25"
+              >0{{ i + 1 }}</span
+            >
+            <p class="text-gray-300 leading-relaxed">{{ item }}</p>
+          </div>
+        </div>
+
+        <!-- Limpieza -->
+        <div *ngIf="activeTab === 'limpieza'" class="space-y-6">
+          <div
+            *ngFor="let item of cleaningItems"
+            class="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <svg
+              class="w-6 h-6 text-yellow-400 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <p class="text-gray-300">{{ item }}</p>
+          </div>
+        </div>
+
+        <!-- Neumáticos y Frenos -->
+        <div *ngIf="activeTab === 'neumaticos-frenos'" class="space-y-6">
+          <div
+            *ngFor="let item of tiresAndBrakesItems"
+            class="flex items-center space-x-4 bg-gray-800/50 p-4 rounded-lg hover:bg-gray-800 transition-colors"
+          >
+            <svg
+              class="w-6 h-6 text-yellow-400 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <p class="text-gray-300">{{ item }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
