@@ -250,6 +250,14 @@ export const routes: Routes = [
             (m) => m.AboutusComponent
           ),
       },
+      {
+        path: 'formulario-financiacion',
+        //component: FormularioFinanciacionComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/formulario-financiacion/formulario-financiacion.component'
+          ).then((m) => m.FormularioFinanciacionComponent),
+      },
     ],
   },
   /* {

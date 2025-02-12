@@ -1,0 +1,377 @@
+<div class="max-w-4xl mx-auto p-6 my-16">
+  <div class="bg-white rounded-lg shadow-xl p-8 border border-gray-200">
+    <!-- Encabezado -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">
+        Solicitud de Financiamiento
+      </h2>
+      <p class="text-gray-600 mt-2">
+        Complete el formulario para solicitar el financiamiento de su moto
+      </p>
+    </div>
+
+    <form
+      [formGroup]="financiacionForm"
+      (ngSubmit)="onSubmit()"
+      class="space-y-8"
+    >
+      <!-- Sección de Datos Personales -->
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">
+          Datos Personales
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Nombres -->
+          <div class="form-group">
+            <label
+              for="nombres"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Nombres
+            </label>
+            <input
+              type="text"
+              id="nombres"
+              formControlName="nombres"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              placeholder="Ingresa tus nombres"
+            />
+          </div>
+
+          <!-- Apellidos -->
+          <div class="form-group">
+            <label
+              for="apellidos"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Apellidos
+            </label>
+            <input
+              type="text"
+              id="apellidos"
+              formControlName="apellidos"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              placeholder="Ingresa tus apellidos"
+            />
+          </div>
+
+          <!-- Celular -->
+          <div class="form-group">
+            <label
+              for="celular"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Celular
+            </label>
+            <input
+              type="tel"
+              id="celular"
+              formControlName="celular"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              placeholder="Ingresa tu celular"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Correo electrónico
+            </label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              placeholder="Ingresa tu correo electrónico"
+            />
+          </div>
+
+          <!-- Tipo de documento -->
+          <div class="form-group">
+            <label
+              for="tipo_documento"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Tipo de documento
+            </label>
+            <select
+              id="tipo_documento"
+              formControlName="tipo_documento"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="DNI">DNI</option>
+              <option value="CE">Carnet de Extranjería</option>
+              <option value="PAS">Pasaporte</option>
+            </select>
+          </div>
+
+          <!-- Número de documento -->
+          <div class="form-group">
+            <label
+              for="numero_documento"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Número de documento
+            </label>
+            <input
+              type="text"
+              id="numero_documento"
+              formControlName="numero_documento"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              placeholder="Ingresa tu número de documento"
+            />
+          </div>
+
+          <!-- Fecha de nacimiento -->
+          <div class="form-group">
+            <label
+              for="fecha_nacimiento"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Fecha de nacimiento
+            </label>
+            <input
+              type="date"
+              id="fecha_nacimiento"
+              formControlName="fecha_nacimiento"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Ubicación -->
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Ubicación</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Departamento -->
+          <div class="form-group">
+            <label
+              for="departamento"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Departamento
+            </label>
+            <select
+              id="departamento"
+              formControlName="departamento"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="">Selecciona departamento</option>
+              <!-- Agregar opciones de departamentos -->
+            </select>
+          </div>
+
+          <!-- Provincia -->
+          <div class="form-group">
+            <label
+              for="provincia"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Provincia
+            </label>
+            <select
+              id="provincia"
+              formControlName="provincia"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="">Selecciona provincia</option>
+              <!-- Agregar opciones de provincias -->
+            </select>
+          </div>
+
+          <!-- Distrito -->
+          <div class="form-group">
+            <label
+              for="distrito"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Distrito
+            </label>
+            <select
+              id="distrito"
+              formControlName="distrito"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="">Selecciona distrito</option>
+              <!-- Agregar opciones de distritos -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Selección de Moto -->
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">
+          Selección de Moto
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Tipo de Moto -->
+          <div class="form-group">
+            <label
+              for="tipo_moto"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Tipo de Moto
+            </label>
+            <select
+              id="tipo_moto"
+              formControlName="tipo_moto_id"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="">Seleccione un tipo</option>
+              @for (tipo of tiposMotos; track tipo.id_tipo_moto) {
+              <option [value]="tipo.id_tipo_moto">{{ tipo.nombre }}</option>
+              }
+            </select>
+            @if (financiacionForm.get('tipo_moto_id')?.touched &&
+            financiacionForm.get('tipo_moto_id')?.invalid) {
+            <p class="mt-1 text-sm text-red-600">
+              Por favor seleccione un tipo de moto
+            </p>
+            }
+          </div>
+
+          <!-- Modelo -->
+          <div class="form-group">
+            <label
+              for="modelo"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Modelo
+            </label>
+            <select
+              id="modelo"
+              formControlName="modelo_id"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              [attr.disabled]="
+                !financiacionForm.get('tipo_moto_id')?.value || cargandoModelos
+              "
+            >
+              <option value="">Seleccione un modelo</option>
+              @if (cargandoModelos) {
+              <option disabled>Cargando modelos...</option>
+              } @else { @for (modelo of modelos; track modelo.id_modelo) {
+              <option [value]="modelo.id_modelo">{{ modelo.nombre }}</option>
+              } }
+            </select>
+            @if (financiacionForm.get('modelo_id')?.touched &&
+            financiacionForm.get('modelo_id')?.invalid) {
+            <p class="mt-1 text-sm text-red-600">
+              Por favor seleccione un modelo
+            </p>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Información Financiera -->
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">
+          Información Financiera
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Situación Laboral -->
+          <div class="form-group">
+            <label
+              for="situacion_laboral"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Situación Laboral
+            </label>
+            <select
+              id="situacion_laboral"
+              formControlName="situacion_laboral"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+            >
+              <option value="">Seleccione su situación</option>
+              <option value="dependiente">Dependiente</option>
+              <option value="independiente">Independiente</option>
+              <option value="empresario">Empresario</option>
+            </select>
+          </div>
+
+          <!-- Ingreso Mensual -->
+          <div class="form-group">
+            <label
+              for="ingreso_mensual"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Ingreso Mensual (S/.)
+            </label>
+            <input
+              type="number"
+              id="ingreso_mensual"
+              formControlName="ingreso_mensual"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              min="0"
+            />
+          </div>
+
+          <!-- Cuota Inicial -->
+          <div class="form-group">
+            <label
+              for="cuota_inicial"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Cuota Inicial (S/.)
+            </label>
+            <input
+              type="number"
+              id="cuota_inicial"
+              formControlName="cuota_inicial"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              min="0"
+            />
+          </div>
+
+          <!-- Plazo -->
+          <div class="form-group">
+            <label
+              for="plazo"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Plazo (meses)
+            </label>
+            <input
+              type="number"
+              id="plazo"
+              formControlName="plazo"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
+              min="6"
+              max="48"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón de envío -->
+      <div class="flex justify-end pt-6">
+        <button
+          type="submit"
+          [disabled]="!financiacionForm.valid"
+          class="px-6 py-3 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 ease-in-out"
+        >
+          <span class="flex items-center">
+            <span>Solicitar Financiamiento</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
