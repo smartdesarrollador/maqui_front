@@ -26,7 +26,7 @@ export class SaludoInfoComponent {
     {
       titulo: 'GARANTÍA Y POST VENTA',
       icono: 'assets/iconos/info/icono2.png',
-      ruta: '/garantia',
+      ruta: '/post-venta',
     },
     {
       titulo: 'ENCUENTRA UN DISTRIBUIDOR',
