@@ -15,7 +15,8 @@
     <img
       [src]="baseUrl + '/' + imagen.file_path"
       [alt]="imagen.alt_text || imagen.title"
-      class="about-image"
+      class="about-image hover:scale-105 transition-transform duration-300 ease-in-out"
+      style="width: 80%; max-width: 1200px; height: auto"
     />
     }
   </div>
