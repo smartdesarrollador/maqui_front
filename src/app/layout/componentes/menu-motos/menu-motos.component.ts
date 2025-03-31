@@ -38,6 +38,8 @@ export class MenuMotosComponent {
   @ViewChild('menuDesplegable') menuDesplegable!: ElementRef;
 
   protected readonly baseUrl = environment.urlRaiz;
+  protected readonly baseUrlCredimaquimotora =
+    environment.dominioCredimaquimotora;
   private menuMotoService = inject(MenuMotoService);
 
   tiposMotos = signal<TipoMoto[]>([]);
