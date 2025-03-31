@@ -1,0 +1,780 @@
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+  <!-- Título principal -->
+  <h1 class="text-5xl font-bold text-gray-800 mb-16">
+    COMPARA Y ELIGE<br />
+    LA MEJOR MOTO
+  </h1>
+
+  <hr class="border-gray-200 my-8" />
+
+  <!-- Sección de comparación -->
+  <div class="flex flex-wrap items-start">
+    <!-- Texto explicativo -->
+    <div class="w-full md:w-1/4 pr-4 mb-6 md:mb-0">
+      <h2 class="text-3xl font-bold text-gray-800">
+        COMPARA HASTA<br />
+        3 MODELOS
+      </h2>
+    </div>
+
+    <!-- Selección de modelos -->
+    <div class="w-full md:w-3/4 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Modelo 1 -->
+      <div class="bg-white rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">01</h3>
+
+        <!-- Select con opciones dinámicas -->
+        <div class="relative">
+          <select
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+            [value]="modeloSeleccionado1 || ''"
+            (change)="onCambioModelo1($event)"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelos()"
+              [value]="modelo.id"
+              [disabled]="modeloYaSeleccionado(modelo.id, 1)"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          *ngIf="modeloSeleccionado1"
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-gray-50 p-2"
+        >
+          <img
+            *ngIf="datosComparacion()!.modelos[0]!.imagen"
+            [src]="getImageUrl(datosComparacion()!.modelos[0]!.imagen)"
+            alt="Moto"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            obtenerNombreModelo(modeloSeleccionado1)
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Modelo 2 -->
+      <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">02</h3>
+
+        <!-- Select con opciones dinámicas -->
+        <div class="relative">
+          <select
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+            [value]="modeloSeleccionado2 || ''"
+            (change)="onCambioModelo2($event)"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelos()"
+              [value]="modelo.id"
+              [disabled]="modeloYaSeleccionado(modelo.id, 2)"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          *ngIf="modeloSeleccionado2"
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-white p-2"
+        >
+          <img
+            *ngIf="datosComparacion()!.modelos[1]!.imagen"
+            [src]="getImageUrl(datosComparacion()!.modelos[1]!.imagen)"
+            alt="Moto"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            obtenerNombreModelo(modeloSeleccionado2)
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Modelo 3 -->
+      <div class="bg-white rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">03</h3>
+
+        <!-- Select con opciones dinámicas -->
+        <div class="relative">
+          <select
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+            [value]="modeloSeleccionado3 || ''"
+            (change)="onCambioModelo3($event)"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelos()"
+              [value]="modelo.id"
+              [disabled]="modeloYaSeleccionado(modelo.id, 3)"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          *ngIf="modeloSeleccionado3"
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-gray-50 p-2"
+        >
+          <img
+            *ngIf="datosComparacion()!.modelos[2]!.imagen"
+            [src]="getImageUrl(datosComparacion()!.modelos[2]!.imagen)"
+            alt="Moto"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            obtenerNombreModelo(modeloSeleccionado3)
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right mt-2 mb-8">
+    <a
+      href="javascript:void(0)"
+      (click)="limpiarComparacion()"
+      class="text-blue-600 text-sm"
+      >Limpiar comparación</a
+    >
+  </div>
+
+  <!-- Mensaje de carga -->
+  <div *ngIf="cargando()" class="flex justify-center my-8">
+    <div
+      class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
+    ></div>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div
+    *ngIf="error()"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-8"
+  >
+    <span class="block sm:inline">{{ error() }}</span>
+  </div>
+
+  <!-- Sección de comparación de características -->
+  <ng-container *ngIf="datosComparacion() && !cargando()">
+    <!-- Sección de imágenes de motos -->
+    <div class="mt-8">
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Colores
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div
+          *ngFor="let modelo of datosComparacion()?.modelos"
+          class="text-center"
+        >
+          <img
+            [src]="getImageUrl(modelo.imagen)"
+            [alt]="modelo.nombre_completo"
+            class="mx-auto mb-2"
+          />
+          <p class="font-bold">{{ modelo.nombre_completo }}</p>
+        </div>
+      </div>
+
+      <!-- Tabla de colores -->
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left">Colores</th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-700">Colores</td>
+              <td
+                *ngFor="
+                  let color of datosComparacion()!.caracteristicas.colores
+                "
+                class="py-3 px-4"
+              >
+                {{ color }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Motor y suspensión -->
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Motor y suspensión
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left"></th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Motor</td>
+              <td
+                *ngFor="
+                  let motor of datosComparacion()!.caracteristicas
+                    .motor_suspension.motor
+                "
+                class="py-3 px-4"
+              >
+                {{ motor }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Cilindrada</td>
+              <td
+                *ngFor="
+                  let cilindrada of datosComparacion()!.caracteristicas
+                    .motor_suspension.cilindrada
+                "
+                class="py-3 px-4"
+              >
+                {{ cilindrada }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Potencia</td>
+              <td
+                *ngFor="
+                  let potencia of datosComparacion()?.caracteristicas
+                    .motor_suspension.potencia
+                "
+                class="py-3 px-4"
+              >
+                {{ potencia }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Arranque</td>
+              <td
+                *ngFor="
+                  let arranque of datosComparacion()?.caracteristicas
+                    .motor_suspension.arranque
+                "
+                class="py-3 px-4"
+              >
+                {{ arranque }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Transmisión</td>
+              <td
+                *ngFor="
+                  let transmision of datosComparacion()?.caracteristicas
+                    .motor_suspension.transmision
+                "
+                class="py-3 px-4"
+              >
+                {{ transmision }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Capacidad de Tanque</td>
+              <td
+                *ngFor="
+                  let capacidad of datosComparacion()?.caracteristicas
+                    .motor_suspension.capacidad_tanque
+                "
+                class="py-3 px-4"
+              >
+                {{ capacidad }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Suspensión Delantera</td>
+              <td
+                *ngFor="
+                  let suspension of datosComparacion()?.caracteristicas
+                    .motor_suspension.suspension_delantera
+                "
+                class="py-3 px-4"
+              >
+                {{ suspension }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Suspensión Posterior</td>
+              <td
+                *ngFor="
+                  let suspension of datosComparacion()?.caracteristicas
+                    .motor_suspension.suspension_posterior
+                "
+                class="py-3 px-4"
+              >
+                {{ suspension }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Batería y Rendimiento -->
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Batería y Rendimiento
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left"></th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Potencia de Batería</td>
+              <td
+                *ngFor="
+                  let potencia of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.potencia_bateria
+                "
+                class="py-3 px-4"
+              >
+                {{ potencia }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Tipo de batería</td>
+              <td
+                *ngFor="
+                  let tipo of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.tipo_bateria
+                "
+                class="py-3 px-4"
+              >
+                {{ tipo }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Batería extraíble</td>
+              <td
+                *ngFor="
+                  let bateria of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.bateria_extraible
+                "
+                class="py-3 px-4"
+              >
+                {{ bateria }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Vida útil batería</td>
+              <td
+                *ngFor="
+                  let vida of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.vida_util_bateria
+                "
+                class="py-3 px-4"
+              >
+                {{ vida }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Tipo de tomacorriente</td>
+              <td
+                *ngFor="
+                  let tipo of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.tipo_tomacorriente
+                "
+                class="py-3 px-4"
+              >
+                {{ tipo }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Tiempo de carga</td>
+              <td
+                *ngFor="
+                  let tiempo of datosComparacion()?.caracteristicas
+                    .bateria_rendimiento.tiempo_carga
+                "
+                class="py-3 px-4"
+              >
+                {{ tiempo }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dimensiones y Peso -->
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Dimensiones y Peso
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left"></th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Peso Neto</td>
+              <td
+                *ngFor="
+                  let peso of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.peso_neto
+                "
+                class="py-3 px-4"
+              >
+                {{ peso }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Carga útil</td>
+              <td
+                *ngFor="
+                  let carga of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.carga_util
+                "
+                class="py-3 px-4"
+              >
+                {{ carga }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Peso bruto</td>
+              <td
+                *ngFor="
+                  let peso of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.peso_bruto
+                "
+                class="py-3 px-4"
+              >
+                {{ peso }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Largo</td>
+              <td
+                *ngFor="
+                  let largo of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.largo
+                "
+                class="py-3 px-4"
+              >
+                {{ largo }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Ancho</td>
+              <td
+                *ngFor="
+                  let ancho of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.ancho
+                "
+                class="py-3 px-4"
+              >
+                {{ ancho }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Alto</td>
+              <td
+                *ngFor="
+                  let alto of datosComparacion()?.caracteristicas
+                    .dimensiones_peso.alto
+                "
+                class="py-3 px-4"
+              >
+                {{ alto }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Llantas y Frenos -->
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Llantas y Frenos
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left"></th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Neumático delantero</td>
+              <td
+                *ngFor="
+                  let neumatico of datosComparacion()?.caracteristicas
+                    .llantas_frenos.neumatico_delantero
+                "
+                class="py-3 px-4"
+              >
+                {{ neumatico }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Neumático posterior</td>
+              <td
+                *ngFor="
+                  let neumatico of datosComparacion()?.caracteristicas
+                    .llantas_frenos.neumatico_posterior
+                "
+                class="py-3 px-4"
+              >
+                {{ neumatico }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Freno delantero</td>
+              <td
+                *ngFor="
+                  let freno of datosComparacion()?.caracteristicas
+                    .llantas_frenos.freno_delantero
+                "
+                class="py-3 px-4"
+              >
+                {{ freno }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Freno posterior</td>
+              <td
+                *ngFor="
+                  let freno of datosComparacion()?.caracteristicas
+                    .llantas_frenos.freno_posterior
+                "
+                class="py-3 px-4"
+              >
+                {{ freno }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Adicionales -->
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Adicionales
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left"></th>
+              <th
+                *ngFor="let modelo of datosComparacion()?.modelos"
+                class="py-2 px-4 text-left"
+              >
+                {{ modelo.nombre_completo }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Cargador vía USB</td>
+              <td
+                *ngFor="
+                  let usb of datosComparacion()?.caracteristicas.adicionales
+                    .cargador_usb
+                "
+                class="py-3 px-4"
+              >
+                {{ usb }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Luz LED</td>
+              <td
+                *ngFor="
+                  let luz of datosComparacion()?.caracteristicas.adicionales
+                    .luz_led
+                "
+                class="py-3 px-4"
+              >
+                {{ luz }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Alarma</td>
+              <td
+                *ngFor="
+                  let alarma of datosComparacion()?.caracteristicas.adicionales
+                    .alarma
+                "
+                class="py-3 px-4"
+              >
+                {{ alarma }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Cajuela</td>
+              <td
+                *ngFor="
+                  let cajuela of datosComparacion()?.caracteristicas.adicionales
+                    .cajuela
+                "
+                class="py-3 px-4"
+              >
+                {{ cajuela }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Tablero LED</td>
+              <td
+                *ngFor="
+                  let tablero of datosComparacion()?.caracteristicas.adicionales
+                    .tablero_led
+                "
+                class="py-3 px-4"
+              >
+                {{ tablero }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">MP3</td>
+              <td
+                *ngFor="
+                  let mp3 of datosComparacion()?.caracteristicas.adicionales.mp3
+                "
+                class="py-3 px-4"
+              >
+                {{ mp3 }}
+              </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 font-medium">Bluetooth</td>
+              <td
+                *ngFor="
+                  let bluetooth of datosComparacion()?.caracteristicas
+                    .adicionales.bluetooth
+                "
+                class="py-3 px-4"
+              >
+                {{ bluetooth }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Botones de cotizar -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+        <div
+          *ngFor="let modelo of datosComparacion()?.modelos"
+          class="text-center"
+        >
+          <button
+            (click)="cotizarModelo(modelo.id)"
+            class="inline-block bg-yellow-400 text-black font-bold py-3 px-8 rounded-md hover:bg-yellow-500 transition duration-300"
+          >
+            Cotizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

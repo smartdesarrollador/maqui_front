@@ -266,6 +266,14 @@ export const routes: Routes = [
             (m) => m.PostVentaComponent
           ),
       },
+      {
+        path: 'comparador-motos',
+        //component: ComparadorMotosComponent,
+        loadComponent: () =>
+          import(
+            './pages/vista/comparador-motos/comparador-motos.component'
+          ).then((m) => m.ComparadorMotosComponent),
+      },
     ],
   },
   /* {
