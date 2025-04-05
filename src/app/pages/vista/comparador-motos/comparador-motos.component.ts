@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComparadorMotosService } from '../../../services/services_motos/comparador-motos.service';
 import { environment } from '../../../../environments/environment';
-
+import { RouterModule } from '@angular/router';
 interface ModeloMoto {
   id: number;
   nombre: string;
@@ -71,7 +71,7 @@ const datosComparacionVacio = {
 @Component({
   selector: 'app-comparador-motos',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './comparador-motos.component.html',
   styleUrl: './comparador-motos.component.css',
 })
@@ -174,7 +174,7 @@ export class ComparadorMotosComponent implements OnInit {
     const seleccionados: ModeloSeleccionado[] = modelos.map((modelo) => ({
       id: modelo.id,
       posicion: modelo.numero,
-      nombreCompleto: modelo.nombre_completo,
+      nombreCompleto: modelo.nombre,
     }));
 
     this.modelosSeleccionados.set(seleccionados);
@@ -223,7 +223,7 @@ export class ComparadorMotosComponent implements OnInit {
    */
   obtenerNombreModelo(id: number): string {
     const modelo = this.modelos().find((m) => m.id === id);
-    return modelo ? modelo.nombre_completo : '';
+    return modelo ? modelo.nombre : '';
   }
 
   /**
