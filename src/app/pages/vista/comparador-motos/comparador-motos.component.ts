@@ -147,6 +147,7 @@ export class ComparadorMotosComponent implements OnInit {
     this.cargando.set(true);
     this.error.set(null);
 
+    // Enviamos los IDs de los modelos directamente
     this.comparadorService.compararModelos(idsModelos).subscribe({
       next: (respuesta) => {
         if (respuesta.status === 'success') {

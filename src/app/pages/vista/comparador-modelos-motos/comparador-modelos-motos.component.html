@@ -1,0 +1,849 @@
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+  <!-- Título principal -->
+  <h1 class="text-5xl font-bold text-gray-800 mb-16">
+    COMPARA Y ELIGE<br />
+    LA MEJOR MOTO
+  </h1>
+
+  <hr class="border-gray-200 my-8" />
+
+  <!-- Mensaje de carga -->
+  <div *ngIf="cargando" class="text-center py-4">
+    <p>Cargando datos...</p>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="error" class="text-center py-4 text-red-600">
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Sección de comparación -->
+  <div class="flex flex-wrap items-start">
+    <!-- Texto explicativo -->
+    <div class="w-full md:w-1/4 pr-4 mb-6 md:mb-0">
+      <h2 class="text-3xl font-bold text-gray-800">
+        COMPARA HASTA<br />
+        3 MODELOS
+      </h2>
+    </div>
+
+    <!-- Selección de modelos -->
+    <div class="w-full md:w-3/4 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Modelo 1 -->
+      <div class="bg-white rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">01</h3>
+
+        <!-- Select con opciones -->
+        <div class="relative">
+          <select
+            (change)="cambioModelo1($event)"
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelosDisponibles"
+              [value]="modelo.id"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-gray-50 p-2"
+        >
+          <img
+            [src]="moto1?.imagen || 'https://via.placeholder.com/30'"
+            [alt]="moto1?.modelo?.nombre_completo || 'Moto'"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            moto1?.modelo?.nombre_completo || "Seleccione un modelo"
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Modelo 2 -->
+      <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">02</h3>
+
+        <!-- Select con opciones -->
+        <div class="relative">
+          <select
+            (change)="cambioModelo2($event)"
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelosDisponibles"
+              [value]="modelo.id"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-white p-2"
+        >
+          <img
+            [src]="moto2?.imagen || 'https://via.placeholder.com/30'"
+            [alt]="moto2?.modelo?.nombre_completo || 'Moto'"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            moto2?.modelo?.nombre_completo || "Seleccione un modelo"
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Modelo 3 -->
+      <div class="bg-white rounded-lg p-4 border border-gray-200">
+        <p class="text-gray-700 font-medium mb-1">MODELO</p>
+        <h3 class="text-5xl font-bold text-gray-800 mb-4">03</h3>
+
+        <!-- Select con opciones -->
+        <div class="relative">
+          <select
+            (change)="cambioModelo3($event)"
+            class="w-full py-3 px-4 border border-gray-300 rounded-lg appearance-none cursor-pointer"
+          >
+            <option value="" disabled selected>Seleccionar modelo</option>
+            <option
+              *ngFor="let modelo of modelosDisponibles"
+              [value]="modelo.id"
+            >
+              {{ modelo.nombre_completo }}
+            </option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Vista previa del modelo seleccionado -->
+        <div
+          class="mt-2 flex items-center border border-gray-200 rounded-lg bg-gray-50 p-2"
+        >
+          <img
+            [src]="moto3?.imagen || 'https://via.placeholder.com/30'"
+            [alt]="moto3?.modelo?.nombre_completo || 'Moto'"
+            class="w-6 h-6 mr-2"
+          />
+          <span class="text-sm">{{
+            moto3?.modelo?.nombre_completo || "Seleccione un modelo"
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right mt-2 mb-8">
+    <a
+      href="#"
+      (click)="limpiarComparador(); $event.preventDefault()"
+      class="text-blue-600 text-sm"
+      >Limpiar comparación</a
+    >
+  </div>
+
+  <!-- Sección de imágenes de motos y datos comparativos -->
+  <div class="mt-8" *ngIf="hayMotosSeleccionadas()">
+    <!-- Colores y sección de imágenes -->
+    <h3
+      class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+    >
+      Colores
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- Imagen Moto 1 -->
+      <div class="text-center" *ngIf="moto1">
+        <img
+          [src]="moto1.imagen || 'https://via.placeholder.com/250x180'"
+          [alt]="moto1.modelo.nombre_completo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">{{ moto1.modelo.nombre_completo }}</p>
+      </div>
+      <div class="text-center" *ngIf="!moto1">
+        <img
+          src="https://via.placeholder.com/250x180"
+          alt="Seleccione un modelo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">Seleccione un modelo</p>
+      </div>
+
+      <!-- Imagen Moto 2 -->
+      <div class="text-center" *ngIf="moto2">
+        <img
+          [src]="moto2.imagen || 'https://via.placeholder.com/250x180'"
+          [alt]="moto2.modelo.nombre_completo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">{{ moto2.modelo.nombre_completo }}</p>
+      </div>
+      <div class="text-center" *ngIf="!moto2">
+        <img
+          src="https://via.placeholder.com/250x180"
+          alt="Seleccione un modelo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">Seleccione un modelo</p>
+      </div>
+
+      <!-- Imagen Moto 3 -->
+      <div class="text-center" *ngIf="moto3">
+        <img
+          [src]="moto3.imagen || 'https://via.placeholder.com/250x180'"
+          [alt]="moto3.modelo.nombre_completo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">{{ moto3.modelo.nombre_completo }}</p>
+      </div>
+      <div class="text-center" *ngIf="!moto3">
+        <img
+          src="https://via.placeholder.com/250x180"
+          alt="Seleccione un modelo"
+          class="mx-auto mb-2"
+        />
+        <p class="font-bold">Seleccione un modelo</p>
+      </div>
+    </div>
+
+    <!-- Tabla de colores -->
+    <div class="overflow-x-auto">
+      <table class="w-full mb-8">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 text-left">Colores</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto1">
+              {{ moto1.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto2">
+              {{ moto2.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto3">
+              {{ moto3.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Colores</td>
+            <td class="py-3 px-4">{{ moto1?.color || "-" }}</td>
+            <td class="py-3 px-4">{{ moto2?.color || "-" }}</td>
+            <td class="py-3 px-4">{{ moto3?.color || "-" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Especificaciones del Motor -->
+    <h3
+      class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+    >
+      Motor
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="w-full mb-8">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 text-left">Especificación</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto1">
+              {{ moto1.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto2">
+              {{ moto2.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto3">
+              {{ moto3.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Tipo de motor</td>
+            <td class="py-3 px-4">{{ moto1?.specs?.motor?.tipo || "-" }}</td>
+            <td class="py-3 px-4">{{ moto2?.specs?.motor?.tipo || "-" }}</td>
+            <td class="py-3 px-4">{{ moto3?.specs?.motor?.tipo || "-" }}</td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Potencia</td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto1?.specs?.motor?.potencia, "potencia") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto2?.specs?.motor?.potencia, "potencia") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto3?.specs?.motor?.potencia, "potencia") }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Cilindrada</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto1?.specs?.motor?.cilindrada, "cilindrada")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto2?.specs?.motor?.cilindrada, "cilindrada")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto3?.specs?.motor?.cilindrada, "cilindrada")
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Torque</td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto1?.specs?.motor?.torque, "torque") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto2?.specs?.motor?.torque, "torque") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto3?.specs?.motor?.torque, "torque") }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Refrigeración</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.motor?.refrigeracion || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.motor?.refrigeracion || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.motor?.refrigeracion || "-" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Especificaciones de Batería para motos eléctricas -->
+    <div *ngIf="tieneMotosElectricas()">
+      <h3
+        class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+      >
+        Batería
+      </h3>
+      <div class="overflow-x-auto">
+        <table class="w-full mb-8">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="py-2 px-4 text-left">Especificación</th>
+              <th class="py-2 px-4 text-left" *ngIf="moto1">
+                {{ moto1.modelo.nombre_completo }}
+              </th>
+              <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+              <th class="py-2 px-4 text-left" *ngIf="moto2">
+                {{ moto2.modelo.nombre_completo }}
+              </th>
+              <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+              <th class="py-2 px-4 text-left" *ngIf="moto3">
+                {{ moto3.modelo.nombre_completo }}
+              </th>
+              <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-700">Capacidad</td>
+              <td class="py-3 px-4">{{ bateria1?.capacidad || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria2?.capacidad || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria3?.capacidad || "-" }}</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-700">Autonomía</td>
+              <td class="py-3 px-4">{{ bateria1?.autonomia || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria2?.autonomia || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria3?.autonomia || "-" }}</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-700">Tiempo de carga</td>
+              <td class="py-3 px-4">{{ bateria1?.tiempo_carga || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria2?.tiempo_carga || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria3?.tiempo_carga || "-" }}</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="py-3 px-4 text-gray-700">Tipo de batería</td>
+              <td class="py-3 px-4">{{ bateria1?.tipo || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria2?.tipo || "-" }}</td>
+              <td class="py-3 px-4">{{ bateria3?.tipo || "-" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Especificaciones de Dimensiones -->
+    <h3
+      class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+    >
+      Dimensiones
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="w-full mb-8">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 text-left">Especificación</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto1">
+              {{ moto1.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto2">
+              {{ moto2.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto3">
+              {{ moto3.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Largo</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto1?.specs?.dimensiones?.largo, "dimension")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto2?.specs?.dimensiones?.largo, "dimension")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto3?.specs?.dimensiones?.largo, "dimension")
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Ancho</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto1?.specs?.dimensiones?.ancho, "dimension")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto2?.specs?.dimensiones?.ancho, "dimension")
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(moto3?.specs?.dimensiones?.ancho, "dimension")
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Alto</td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto1?.specs?.dimensiones?.alto, "dimension") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto2?.specs?.dimensiones?.alto, "dimension") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto3?.specs?.dimensiones?.alto, "dimension") }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Distancia entre ejes</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto1?.specs?.dimensiones?.distancia_ejes,
+                  "dimension"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto2?.specs?.dimensiones?.distancia_ejes,
+                  "dimension"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto3?.specs?.dimensiones?.distancia_ejes,
+                  "dimension"
+                )
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Altura del asiento</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto1?.specs?.dimensiones?.altura_asiento,
+                  "dimension"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto2?.specs?.dimensiones?.altura_asiento,
+                  "dimension"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto3?.specs?.dimensiones?.altura_asiento,
+                  "dimension"
+                )
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Peso</td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto1?.specs?.dimensiones?.peso, "peso") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto2?.specs?.dimensiones?.peso, "peso") }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearValor(moto3?.specs?.dimensiones?.peso, "peso") }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Capacidad del tanque</td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto1?.specs?.dimensiones?.capacidad_tanque,
+                  "capacidad"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto2?.specs?.dimensiones?.capacidad_tanque,
+                  "capacidad"
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearValor(
+                  moto3?.specs?.dimensiones?.capacidad_tanque,
+                  "capacidad"
+                )
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Especificaciones de Llantas y Frenos -->
+    <h3
+      class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+    >
+      Llantas y Frenos
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="w-full mb-8">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 text-left">Especificación</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto1">
+              {{ moto1.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto2">
+              {{ moto2.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto3">
+              {{ moto3.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Llanta delantera</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.llantas_frenos?.llanta_delantera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.llantas_frenos?.llanta_delantera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.llantas_frenos?.llanta_delantera || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Llanta trasera</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.llantas_frenos?.llanta_trasera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.llantas_frenos?.llanta_trasera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.llantas_frenos?.llanta_trasera || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Freno delantero</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.llantas_frenos?.freno_delantero || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.llantas_frenos?.freno_delantero || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.llantas_frenos?.freno_delantero || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Freno trasero</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.llantas_frenos?.freno_trasero || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.llantas_frenos?.freno_trasero || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.llantas_frenos?.freno_trasero || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Sistema ABS</td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto1?.specs?.llantas_frenos?.abs) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto2?.specs?.llantas_frenos?.abs) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto3?.specs?.llantas_frenos?.abs) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Características Adicionales -->
+    <h3
+      class="text-xl font-bold text-blue-700 border-b border-gray-200 pb-2 mb-4"
+    >
+      Características Adicionales
+    </h3>
+    <div class="overflow-x-auto">
+      <table class="w-full mb-8">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 text-left">Característica</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto1">
+              {{ moto1.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto1">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto2">
+              {{ moto2.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto2">-</th>
+            <th class="py-2 px-4 text-left" *ngIf="moto3">
+              {{ moto3.modelo.nombre_completo }}
+            </th>
+            <th class="py-2 px-4 text-left" *ngIf="!moto3">-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Sistema de arranque</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.adicionales?.sistema_arranque || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.adicionales?.sistema_arranque || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.adicionales?.sistema_arranque || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Sistema de transmisión</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.adicionales?.sistema_transmision || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.adicionales?.sistema_transmision || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.adicionales?.sistema_transmision || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Suspensión delantera</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.adicionales?.suspension_delantera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.adicionales?.suspension_delantera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.adicionales?.suspension_delantera || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Suspensión trasera</td>
+            <td class="py-3 px-4">
+              {{ moto1?.specs?.adicionales?.suspension_trasera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto2?.specs?.adicionales?.suspension_trasera || "-" }}
+            </td>
+            <td class="py-3 px-4">
+              {{ moto3?.specs?.adicionales?.suspension_trasera || "-" }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Iluminación LED</td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(moto1?.specs?.adicionales?.iluminacion_led)
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(moto2?.specs?.adicionales?.iluminacion_led)
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(moto3?.specs?.adicionales?.iluminacion_led)
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Panel digital</td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto1?.specs?.adicionales?.panel_digital) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto2?.specs?.adicionales?.panel_digital) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto3?.specs?.adicionales?.panel_digital) }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">Conectividad Bluetooth</td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(
+                  moto1?.specs?.adicionales?.conectividad_bluetooth
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(
+                  moto2?.specs?.adicionales?.conectividad_bluetooth
+                )
+              }}
+            </td>
+            <td class="py-3 px-4">
+              {{
+                formatearBooleano(
+                  moto3?.specs?.adicionales?.conectividad_bluetooth
+                )
+              }}
+            </td>
+          </tr>
+          <tr class="border-b border-gray-200">
+            <td class="py-3 px-4 text-gray-700">USB</td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto1?.specs?.adicionales?.usb) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto2?.specs?.adicionales?.usb) }}
+            </td>
+            <td class="py-3 px-4">
+              {{ formatearBooleano(moto3?.specs?.adicionales?.usb) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
