@@ -60,6 +60,13 @@ interface Moto {
   };
 }
 
+interface MotoColor {
+  id_moto_color: number;
+  modelo_id: number;
+  color: string;
+  imagen_color: string;
+}
+
 @Component({
   selector: 'app-detalle-moto',
   standalone: true,
@@ -75,6 +82,9 @@ export class DetalleMotoComponent implements OnInit {
   moto: Moto | null = null;
   isLoading = true;
   error: string | null = null;
+  coloresMoto: MotoColor[] = [];
+  colorSeleccionado: string | null = null;
+  imagenActual: string = '';
 
   ngOnInit(): void {
     // Obtener el ID de la ruta
@@ -91,7 +101,10 @@ export class DetalleMotoComponent implements OnInit {
     this.motosService.getMotoById(id).subscribe({
       next: (response) => {
         this.moto = response.data;
+        this.imagenActual = this.moto.imagen;
         this.isLoading = false;
+        // Cargar los colores disponibles para este modelo
+        this.loadColores(this.moto.modelo_id);
       },
       error: (error) => {
         this.error = 'Error al cargar los detalles de la moto';
@@ -99,6 +112,32 @@ export class DetalleMotoComponent implements OnInit {
         console.error('Error:', error);
       },
     });
+  }
+
+  private loadColores(modeloId: number): void {
+    this.motosService.getColoresMoto(modeloId).subscribe({
+      next: (colores) => {
+        this.coloresMoto = colores;
+        // Si hay colores disponibles, seleccionar el primero por defecto
+        if (this.coloresMoto.length > 0) {
+          this.colorSeleccionado = this.coloresMoto[0].color;
+        }
+      },
+      error: (error) => {
+        console.error('Error al cargar los colores:', error);
+      },
+    });
+  }
+
+  // Método para seleccionar un color
+  seleccionarColor(color: MotoColor): void {
+    this.colorSeleccionado = color.color;
+    this.imagenActual = color.imagen_color;
+  }
+
+  // Método para obtener la URL completa de un ícono de color
+  getColorIconUrl(color: string): string {
+    return `${this.baseUrl}/assets/imagen/colores_motos/${color}.png`;
   }
 
   // Método para verificar si una característica está disponible

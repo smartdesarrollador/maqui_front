@@ -115,6 +115,13 @@ interface TipoMoto {
   descripcion: string;
 }
 
+interface MotoColor {
+  id_moto_color: number;
+  modelo_id: number;
+  color: string;
+  imagen_color: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -151,6 +158,15 @@ export class MotosService {
    */
   getMotoById(id: number): Observable<{ data: Moto }> {
     return this.http.get<{ data: Moto }>(this.baseUrl + '/motos/' + id);
+  }
+
+  /**
+   * Obtiene los colores disponibles para un modelo de moto
+   */
+  getColoresMoto(modeloId: number): Observable<MotoColor[]> {
+    return this.http.get<MotoColor[]>(
+      `${this.baseUrl}/moto-colores/modelo/${modeloId}`
+    );
   }
 
   /**
