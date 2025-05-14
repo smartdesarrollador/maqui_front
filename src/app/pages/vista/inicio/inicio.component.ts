@@ -14,6 +14,8 @@ import { SectionImagenesComponent } from '../../../layout/componentes/section-im
 import { InfoMisionVisionComponent } from '../nosotros/mision-vision/info-mision-vision/info-mision-vision.component';
 import { SaludoInfoComponent } from '../../../layout/componentes/saludo-info/saludo-info.component';
 import { SectionTiposMotosComponent } from '../../../layout/componentes/section-tipos-motos/section-tipos-motos.component';
+import { MapaUbicacionComponent } from '../mapa-ubicacion/mapa-ubicacion.component';
+
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -33,6 +35,7 @@ import { SectionTiposMotosComponent } from '../../../layout/componentes/section-
     InfoMisionVisionComponent,
     SaludoInfoComponent,
     SectionTiposMotosComponent,
+    MapaUbicacionComponent,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
