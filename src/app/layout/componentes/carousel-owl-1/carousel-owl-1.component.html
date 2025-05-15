@@ -1,7 +1,9 @@
 <owl-carousel-o [options]="customOptions">
-  <ng-template *ngFor="let item of listBanners" carouselSlide
-    ><img src="{{ urlRaiz + item.url }}" class="" alt="..."
-  /></ng-template>
+  <ng-template *ngFor="let item of listBanners" carouselSlide>
+    <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+      <img src="{{ urlRaiz + item.url }}" class="" alt="{{ item.nombre }}" />
+    </a>
+  </ng-template>
 </owl-carousel-o>
 <!-- <div class="owl-prev">‹</div>
 <div class="owl-next">›</div> -->
