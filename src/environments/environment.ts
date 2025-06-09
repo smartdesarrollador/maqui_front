@@ -56,5 +56,5 @@ export const environment = {
     categoria1: '/categoria1',
     tabla1: '/tabla1',
   },
-  dominioCredimaquimotora: 'https://tiendamaquimotora.enfocussoluciones.com',
+  dominioCredimaquimotora: 'https://tiendamaquimotora.enfocussoluciones.pe',
 };
