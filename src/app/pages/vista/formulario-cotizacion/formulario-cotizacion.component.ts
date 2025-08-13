@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormularioCotizacionService } from '../../../services/services_motos/formulario-cotizacion.service';
+import { MotosService } from '../../../services/services_motos/motos.service';
 
 @Component({
   selector: 'app-formulario-cotizacion',
@@ -18,11 +19,17 @@ import { FormularioCotizacionService } from '../../../services/services_motos/fo
 export class FormularioCotizacionComponent {
   private readonly fb = inject(FormBuilder);
   private readonly cotizacionService = inject(FormularioCotizacionService);
+  private readonly motosService = inject(MotosService);
 
   formularioCotizacion: FormGroup;
   enviando = false;
   mensajeExito = '';
   mensajeError = '';
+
+  // Datos dinámicos
+  tiposMotos: any[] = [];
+  modelos: any[] = [];
+  modelosFiltrados: any[] = [];
 
   opcionesTiempo = [
     'En una semana',
@@ -49,6 +56,73 @@ export class FormularioCotizacionComponent {
       distrito: ['', [Validators.required]],
       tiempo_compra: ['', [Validators.required]],
     });
+
+    // Cargar datos iniciales
+    this.cargarTiposMotos();
+    this.cargarModelos();
+
+    // Configurar listener para cambios en tipo de moto
+    this.formularioCotizacion.get('tipo_moto')?.valueChanges.subscribe(tipoMotoId => {
+      if (this.tiposMotos.length > 0 && this.modelos.length > 0) {
+        this.filtrarModelosPorTipo(tipoMotoId);
+        // Limpiar modelo seleccionado cuando cambie el tipo
+        this.formularioCotizacion.get('modelo')?.setValue('');
+      }
+    });
+  }
+
+  /**
+   * Carga los tipos de motos desde el servicio
+   */
+  private cargarTiposMotos(): void {
+    this.motosService.getTipoMotos().subscribe({
+      next: (tipos) => {
+        this.tiposMotos = tipos || [];
+      },
+      error: (error) => {
+        console.error('Error al cargar tipos de motos:', error);
+        this.tiposMotos = [];
+      }
+    });
+  }
+
+  /**
+   * Carga todos los modelos desde el servicio
+   */
+  private cargarModelos(): void {
+    this.motosService.getModelos().subscribe({
+      next: (modelos) => {
+        this.modelos = modelos || [];
+        this.modelosFiltrados = modelos || [];
+      },
+      error: (error) => {
+        console.error('Error al cargar modelos:', error);
+        this.modelos = [];
+        this.modelosFiltrados = [];
+      }
+    });
+  }
+
+  /**
+   * Filtra los modelos según el tipo de moto seleccionado
+   */
+  private filtrarModelosPorTipo(tipoMotoId: string): void {
+    if (!tipoMotoId) {
+      this.modelosFiltrados = this.modelos;
+      return;
+    }
+
+    // Convertir el ID del tipo a número
+    const tipoMotoIdNumber = parseInt(tipoMotoId, 10);
+    if (isNaN(tipoMotoIdNumber)) {
+      this.modelosFiltrados = [];
+      return;
+    }
+
+    // Filtrar modelos por el ID del tipo seleccionado
+    this.modelosFiltrados = this.modelos.filter(modelo => 
+      modelo && modelo.tipo_moto_id === tipoMotoIdNumber
+    );
   }
 
   /**

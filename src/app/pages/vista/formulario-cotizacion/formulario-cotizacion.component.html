@@ -28,8 +28,9 @@
             [class.border-red-500]="esCampoInvalido('tipo_moto')"
           >
             <option value="">Selecciona un tipo</option>
-            <option value="TODO TERRENO">TODO TERRENO</option>
-            <!-- Agregar más opciones según necesites -->
+            @for (tipoMoto of tiposMotos; track tipoMoto.id_tipo_moto) {
+            <option [value]="tipoMoto.id_tipo_moto">{{ tipoMoto.nombre }}</option>
+            }
           </select>
           <span
             *ngIf="esCampoInvalido('tipo_moto')"
@@ -52,8 +53,9 @@
             [class.border-red-500]="esCampoInvalido('modelo')"
           >
             <option value="">Selecciona un modelo</option>
-            <option value="MONTANA 200">MONTANA 200</option>
-            <!-- Agregar más opciones según necesites -->
+            @for (modelo of modelosFiltrados; track modelo.id_modelo) {
+            <option [value]="modelo.id_modelo">{{ modelo.nombre }}</option>
+            }
           </select>
           <span
             *ngIf="esCampoInvalido('modelo')"
