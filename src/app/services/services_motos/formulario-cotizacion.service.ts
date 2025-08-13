@@ -56,7 +56,7 @@ interface CotizacionResponse {
 })
 export class FormularioCotizacionService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/cotizaciones`;
+  private readonly apiUrl = `${environment.apiBaseUrl}/cotizaciones`;
 
   /**
    * Envía los datos del formulario de cotización al servidor

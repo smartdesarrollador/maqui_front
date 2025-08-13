@@ -327,6 +327,18 @@ export class FormularioCotizacionComponent {
         const distrito = this.distritosFiltrados.find(d => d.codigo === formData.distrito);
         formData.distrito = distrito?.nombre || formData.distrito;
       }
+      
+      // Convertir ID de tipo de moto a nombre
+      if (formData.tipo_moto) {
+        const tipoMoto = this.tiposMotos.find(t => t.id_tipo_moto.toString() === formData.tipo_moto);
+        formData.tipo_moto = tipoMoto?.nombre || formData.tipo_moto;
+      }
+      
+      // Convertir ID de modelo a nombre
+      if (formData.modelo) {
+        const modelo = this.modelosFiltrados.find(m => m.id_modelo.toString() === formData.modelo);
+        formData.modelo = modelo?.nombre || formData.modelo;
+      }
 
       const response = await this.cotizacionService
         .guardarCotizacion(formData)
