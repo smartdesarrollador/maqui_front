@@ -215,7 +215,9 @@
             [class.border-red-500]="esCampoInvalido('departamento')"
           >
             <option value="">Selecciona departamento</option>
-            <!-- Agregar opciones de departamentos -->
+            @for (departamento of departamentos; track departamento.codigo) {
+            <option [value]="departamento.codigo">{{ departamento.nombre }}</option>
+            }
           </select>
           <span
             *ngIf="esCampoInvalido('departamento')"
@@ -238,7 +240,9 @@
             [class.border-red-500]="esCampoInvalido('provincia')"
           >
             <option value="">Selecciona provincia</option>
-            <!-- Agregar opciones de provincias -->
+            @for (provincia of provinciasFiltradas; track provincia.codigo) {
+            <option [value]="provincia.codigo">{{ provincia.nombre }}</option>
+            }
           </select>
           <span
             *ngIf="esCampoInvalido('provincia')"
@@ -261,7 +265,9 @@
             [class.border-red-500]="esCampoInvalido('distrito')"
           >
             <option value="">Selecciona distrito</option>
-            <!-- Agregar opciones de distritos -->
+            @for (distrito of distritosFiltrados; track distrito.codigo) {
+            <option [value]="distrito.codigo">{{ distrito.nombre }}</option>
+            }
           </select>
           <span
             *ngIf="esCampoInvalido('distrito')"
