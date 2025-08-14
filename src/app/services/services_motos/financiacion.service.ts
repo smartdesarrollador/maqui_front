@@ -185,25 +185,25 @@ export class FinanciacionService {
 
   // Enviar solicitud de financiamiento
   solicitarFinanciamiento(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/financiamientos`, data);
+    return this.http.post<any>(`${environment.apiBaseUrl}/financiamientos`, data);
   }
 
   // Obtener departamentos
   getDepartamentos(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/departamentos`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/departamentos`);
   }
 
   // Obtener provincias por departamento
   getProvincias(departamentoId: string): Observable<any[]> {
     return this.http.get<any[]>(
-      `${environment.apiUrl}/provincias/${departamentoId}`
+      `${environment.apiBaseUrl}/provincias/${departamentoId}`
     );
   }
 
   // Obtener distritos por provincia
   getDistritos(provinciaId: string): Observable<any[]> {
     return this.http.get<any[]>(
-      `${environment.apiUrl}/distritos/${provinciaId}`
+      `${environment.apiBaseUrl}/distritos/${provinciaId}`
     );
   }
 }

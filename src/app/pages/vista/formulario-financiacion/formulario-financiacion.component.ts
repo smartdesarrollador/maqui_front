@@ -296,10 +296,30 @@ export class FormularioFinanciacionComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('Financiamiento solicitado con éxito', response);
-            // Aquí puedes agregar lógica adicional después del éxito
+            
+            // Mostrar mensaje de éxito al usuario
+            const mensaje = response.email_enviado 
+              ? '¡Solicitud enviada exitosamente! Te hemos enviado un correo de confirmación con todos los detalles.'
+              : '¡Solicitud enviada exitosamente! Nos contactaremos contigo pronto.';
+            
+            alert(mensaje);
+            
+            // Limpiar el formulario
+            this.financiacionForm.reset();
+            this.modelosFiltrados = [];
+            this.provinciasFiltradas = [];
+            this.distritosFiltrados = [];
+            
+            // Resetear valores por defecto
+            this.financiacionForm.patchValue({
+              tipo_documento: 'DNI'
+            });
           },
           error: (error) => {
             console.error('Error al solicitar financiamiento:', error);
+            
+            const mensajeError = error.error?.message || 'Ocurrió un error al enviar tu solicitud. Por favor, inténtalo nuevamente.';
+            alert('Error: ' + mensajeError);
           },
         });
     }

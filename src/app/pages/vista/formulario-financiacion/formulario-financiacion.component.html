@@ -254,7 +254,7 @@
               formControlName="modelo_id"
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               [attr.disabled]="
-                !financiacionForm.get('tipo_moto_id')?.value || cargandoModelos
+                !financiacionForm.get('tipo_moto_id')?.value || cargandoModelos || modelosFiltrados.length === 0 ? true : null
               "
             >
               <option value="">Seleccione un modelo</option>
@@ -350,6 +350,11 @@
               min="6"
               max="48"
             />
+            @if (financiacionForm.get('plazo')?.touched && financiacionForm.get('plazo')?.invalid) {
+            <p class="mt-1 text-sm text-red-600">
+              El plazo debe ser entre 6 y 48 meses
+            </p>
+            }
           </div>
         </div>
       </div>
