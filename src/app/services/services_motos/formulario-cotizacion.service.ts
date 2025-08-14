@@ -28,6 +28,7 @@ interface CotizacionResponse {
   message: string;
   data?: {
     cotizacion_id: number;
+    email_enviado?: boolean;
     cliente: {
       id_cliente: number;
       nombre: string;

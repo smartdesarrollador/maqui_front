@@ -345,10 +345,20 @@ export class FormularioCotizacionComponent {
         .toPromise();
 
       if (response?.status === 'success') {
-        this.mensajeExito = 'Cotización enviada exitosamente';
+        // Construir mensaje basado en si se envió el correo
+        let mensaje = response.message || 'Cotización enviada exitosamente';
+        if (response.data?.email_enviado) {
+          mensaje += ' Revisa tu correo electrónico para más detalles.';
+        }
+        this.mensajeExito = mensaje;
         this.formularioCotizacion.reset();
+        
+        // Limpiar arrays filtrados
+        this.provinciasFiltradas = [];
+        this.distritosFiltrados = [];
+        this.modelosFiltrados = this.modelos;
       } else {
-        this.mensajeError = 'Error al enviar la cotización';
+        this.mensajeError = response?.message || 'Error al enviar la cotización';
       }
     } catch (error) {
       this.mensajeError = 'Error al procesar la solicitud';
