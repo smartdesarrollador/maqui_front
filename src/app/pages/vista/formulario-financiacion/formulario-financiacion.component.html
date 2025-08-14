@@ -161,7 +161,9 @@
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
             >
               <option value="">Selecciona departamento</option>
-              <!-- Agregar opciones de departamentos -->
+              @for (departamento of departamentos; track departamento.codigo) {
+              <option [value]="departamento.codigo">{{ departamento.nombre }}</option>
+              }
             </select>
           </div>
 
@@ -179,7 +181,9 @@
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
             >
               <option value="">Selecciona provincia</option>
-              <!-- Agregar opciones de provincias -->
+              @for (provincia of provinciasFiltradas; track provincia.codigo) {
+              <option [value]="provincia.codigo">{{ provincia.nombre }}</option>
+              }
             </select>
           </div>
 
@@ -197,7 +201,9 @@
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
             >
               <option value="">Selecciona distrito</option>
-              <!-- Agregar opciones de distritos -->
+              @for (distrito of distritosFiltrados; track distrito.codigo) {
+              <option [value]="distrito.codigo">{{ distrito.nombre }}</option>
+              }
             </select>
           </div>
         </div>
@@ -254,7 +260,7 @@
               <option value="">Seleccione un modelo</option>
               @if (cargandoModelos) {
               <option disabled>Cargando modelos...</option>
-              } @else { @for (modelo of modelos; track modelo.id_modelo) {
+              } @else { @for (modelo of modelosFiltrados; track modelo.id_modelo) {
               <option [value]="modelo.id_modelo">{{ modelo.nombre }}</option>
               } }
             </select>

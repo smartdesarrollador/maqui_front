@@ -175,14 +175,12 @@ export class FinanciacionService {
 
   // Obtener todos los tipos de motos
   getTipoMotos(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/tipos-motos`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/tipos-motos`);
   }
 
   // Obtener modelos por tipo de moto
   getModelosPorTipo(tipoMotoId: number): Observable<any[]> {
-    return this.http.get<any[]>(
-      `${environment.apiUrl}/modelos-por-tipo/${tipoMotoId}`
-    );
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/modelos`);
   }
 
   // Enviar solicitud de financiamiento
