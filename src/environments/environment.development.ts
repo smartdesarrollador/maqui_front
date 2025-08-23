@@ -48,4 +48,5 @@ export const environment = {
     tabla1: '/tabla1',
   },
   dominioCredimaquimotora: 'http://localhost:7000',
+  dominioReservasCita: 'http://localhost/form.php',
 };

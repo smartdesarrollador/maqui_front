@@ -40,6 +40,7 @@ export class MenuMotosComponent {
   protected readonly baseUrl = environment.urlRaiz;
   protected readonly baseUrlCredimaquimotora =
     environment.dominioCredimaquimotora;
+  protected readonly baseUrlReservasCita = environment.dominioReservasCita;
   private menuMotoService = inject(MenuMotoService);
 
   tiposMotos = signal<TipoMoto[]>([]);
