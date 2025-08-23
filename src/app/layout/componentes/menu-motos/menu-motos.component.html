@@ -118,8 +118,14 @@
   @if (mostrarMenuMovil()) {
   <div class="md:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <button
+      <!-- <button
         (click)="toggleMenu()"
+        class="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+      >
+        Elige una moto
+      </button> -->
+      <button
+        routerLink="/motos-por-tipo"
         class="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
       >
         Elige una moto
