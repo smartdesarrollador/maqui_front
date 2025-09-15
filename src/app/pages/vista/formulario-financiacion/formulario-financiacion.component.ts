@@ -20,7 +20,7 @@ export class FormularioFinanciacionComponent implements OnInit {
 
   // Datos geográficos de Perú
   departamentos = [
-    { codigo: '01', nombre: 'Amazonas' },
+    /*  { codigo: '01', nombre: 'Amazonas' },
     { codigo: '02', nombre: 'Áncash' },
     { codigo: '03', nombre: 'Apurímac' },
     { codigo: '04', nombre: 'Arequipa' },
@@ -33,9 +33,9 @@ export class FormularioFinanciacionComponent implements OnInit {
     { codigo: '11', nombre: 'Ica' },
     { codigo: '12', nombre: 'Junín' },
     { codigo: '13', nombre: 'La Libertad' },
-    { codigo: '14', nombre: 'Lambayeque' },
+    { codigo: '14', nombre: 'Lambayeque' }, */
     { codigo: '15', nombre: 'Lima' },
-    { codigo: '16', nombre: 'Loreto' },
+    /*  { codigo: '16', nombre: 'Loreto' },
     { codigo: '17', nombre: 'Madre de Dios' },
     { codigo: '18', nombre: 'Moquegua' },
     { codigo: '19', nombre: 'Pasco' },
@@ -44,7 +44,7 @@ export class FormularioFinanciacionComponent implements OnInit {
     { codigo: '22', nombre: 'San Martín' },
     { codigo: '23', nombre: 'Tacna' },
     { codigo: '24', nombre: 'Tumbes' },
-    { codigo: '25', nombre: 'Ucayali' }
+    { codigo: '25', nombre: 'Ucayali' } */
   ];
 
   provinciasFiltradas: any[] = [];
@@ -52,9 +52,10 @@ export class FormularioFinanciacionComponent implements OnInit {
 
   // Mapa de provincias por departamento
   provinciasPorDepartamento: { [key: string]: any[] } = {
-    '15': [ // Lima
+    '15': [
+      // Lima
       { codigo: '1501', nombre: 'Lima' },
-      { codigo: '1502', nombre: 'Barranca' },
+      /*  { codigo: '1502', nombre: 'Barranca' },
       { codigo: '1503', nombre: 'Cajatambo' },
       { codigo: '1504', nombre: 'Canta' },
       { codigo: '1505', nombre: 'Cañete' },
@@ -62,20 +63,22 @@ export class FormularioFinanciacionComponent implements OnInit {
       { codigo: '1507', nombre: 'Huarochirí' },
       { codigo: '1508', nombre: 'Huaura' },
       { codigo: '1509', nombre: 'Oyón' },
-      { codigo: '1510', nombre: 'Yauyos' }
+      { codigo: '1510', nombre: 'Yauyos' }, */
     ],
-    '04': [ // Arequipa
-      { codigo: '0401', nombre: 'Arequipa' },
+    '04': [
+      // Arequipa
+      /*  { codigo: '0401', nombre: 'Arequipa' },
       { codigo: '0402', nombre: 'Camaná' },
       { codigo: '0403', nombre: 'Caravelí' },
       { codigo: '0404', nombre: 'Castilla' },
       { codigo: '0405', nombre: 'Caylloma' },
       { codigo: '0406', nombre: 'Condesuyos' },
       { codigo: '0407', nombre: 'Islay' },
-      { codigo: '0408', nombre: 'La Unión' }
+      { codigo: '0408', nombre: 'La Unión' }, */
     ],
-    '13': [ // La Libertad
-      { codigo: '1301', nombre: 'Trujillo' },
+    '13': [
+      // La Libertad
+      /* { codigo: '1301', nombre: 'Trujillo' },
       { codigo: '1302', nombre: 'Ascope' },
       { codigo: '1303', nombre: 'Bolívar' },
       { codigo: '1304', nombre: 'Chepén' },
@@ -86,13 +89,14 @@ export class FormularioFinanciacionComponent implements OnInit {
       { codigo: '1309', nombre: 'Sánchez Carrión' },
       { codigo: '1310', nombre: 'Santiago de Chuco' },
       { codigo: '1311', nombre: 'Gran Chimú' },
-      { codigo: '1312', nombre: 'Virú' }
-    ]
+      { codigo: '1312', nombre: 'Virú' }, */
+    ],
   };
 
   // Mapa de distritos por provincia (Lima Metropolitana)
   distritosPorProvincia: { [key: string]: any[] } = {
-    '1501': [ // Lima Metropolitana
+    '1501': [
+      // Lima Metropolitana
       { codigo: '150101', nombre: 'Lima' },
       { codigo: '150102', nombre: 'Ancón' },
       { codigo: '150103', nombre: 'Ate' },
@@ -135,8 +139,8 @@ export class FormularioFinanciacionComponent implements OnInit {
       { codigo: '150140', nombre: 'Santiago de Surco' },
       { codigo: '150141', nombre: 'Surquillo' },
       { codigo: '150142', nombre: 'Villa El Salvador' },
-      { codigo: '150143', nombre: 'Villa María del Triunfo' }
-    ]
+      { codigo: '150143', nombre: 'Villa María del Triunfo' },
+    ],
   };
 
   constructor(
@@ -183,18 +187,22 @@ export class FormularioFinanciacionComponent implements OnInit {
       });
 
     // Escuchar cambios en departamento
-    this.financiacionForm.get('departamento')?.valueChanges.subscribe(departamentoCodigo => {
-      this.filtrarProvinciasPorDepartamento(departamentoCodigo);
-      // Limpiar provincia y distrito cuando cambie el departamento
-      this.financiacionForm.patchValue({ provincia: '', distrito: '' });
-    });
+    this.financiacionForm
+      .get('departamento')
+      ?.valueChanges.subscribe((departamentoCodigo) => {
+        this.filtrarProvinciasPorDepartamento(departamentoCodigo);
+        // Limpiar provincia y distrito cuando cambie el departamento
+        this.financiacionForm.patchValue({ provincia: '', distrito: '' });
+      });
 
     // Escuchar cambios en provincia
-    this.financiacionForm.get('provincia')?.valueChanges.subscribe(provinciaCodigo => {
-      this.filtrarDistritosPorProvincia(provinciaCodigo);
-      // Limpiar distrito cuando cambie la provincia
-      this.financiacionForm.patchValue({ distrito: '' });
-    });
+    this.financiacionForm
+      .get('provincia')
+      ?.valueChanges.subscribe((provinciaCodigo) => {
+        this.filtrarDistritosPorProvincia(provinciaCodigo);
+        // Limpiar distrito cuando cambie la provincia
+        this.financiacionForm.patchValue({ distrito: '' });
+      });
   }
 
   cargarTiposMotos() {
@@ -238,8 +246,8 @@ export class FormularioFinanciacionComponent implements OnInit {
     }
 
     // Filtrar modelos por el ID del tipo seleccionado
-    this.modelosFiltrados = this.modelos.filter(modelo => 
-      modelo && modelo.tipo_moto_id === tipoMotoIdNumber
+    this.modelosFiltrados = this.modelos.filter(
+      (modelo) => modelo && modelo.tipo_moto_id === tipoMotoIdNumber
     );
   }
 
@@ -252,7 +260,8 @@ export class FormularioFinanciacionComponent implements OnInit {
       return;
     }
 
-    this.provinciasFiltradas = this.provinciasPorDepartamento[departamentoCodigo] || [];
+    this.provinciasFiltradas =
+      this.provinciasPorDepartamento[departamentoCodigo] || [];
     this.distritosFiltrados = [];
   }
 
@@ -272,56 +281,62 @@ export class FormularioFinanciacionComponent implements OnInit {
     if (this.financiacionForm.valid) {
       // Preparar los datos para envío - convertir códigos a nombres
       const formData = { ...this.financiacionForm.value };
-      
+
       // Convertir código de departamento a nombre
       if (formData.departamento) {
-        const departamento = this.departamentos.find(d => d.codigo === formData.departamento);
+        const departamento = this.departamentos.find(
+          (d) => d.codigo === formData.departamento
+        );
         formData.departamento = departamento?.nombre || formData.departamento;
       }
-      
+
       // Convertir código de provincia a nombre
       if (formData.provincia) {
-        const provincia = this.provinciasFiltradas.find(p => p.codigo === formData.provincia);
+        const provincia = this.provinciasFiltradas.find(
+          (p) => p.codigo === formData.provincia
+        );
         formData.provincia = provincia?.nombre || formData.provincia;
       }
-      
+
       // Convertir código de distrito a nombre
       if (formData.distrito) {
-        const distrito = this.distritosFiltrados.find(d => d.codigo === formData.distrito);
+        const distrito = this.distritosFiltrados.find(
+          (d) => d.codigo === formData.distrito
+        );
         formData.distrito = distrito?.nombre || formData.distrito;
       }
 
-      this.financiacionService
-        .solicitarFinanciamiento(formData)
-        .subscribe({
-          next: (response) => {
-            console.log('Financiamiento solicitado con éxito', response);
-            
-            // Mostrar mensaje de éxito al usuario
-            const mensaje = response.email_enviado 
-              ? '¡Solicitud enviada exitosamente! Te hemos enviado un correo de confirmación con todos los detalles.'
-              : '¡Solicitud enviada exitosamente! Nos contactaremos contigo pronto.';
-            
-            alert(mensaje);
-            
-            // Limpiar el formulario
-            this.financiacionForm.reset();
-            this.modelosFiltrados = [];
-            this.provinciasFiltradas = [];
-            this.distritosFiltrados = [];
-            
-            // Resetear valores por defecto
-            this.financiacionForm.patchValue({
-              tipo_documento: 'DNI'
-            });
-          },
-          error: (error) => {
-            console.error('Error al solicitar financiamiento:', error);
-            
-            const mensajeError = error.error?.message || 'Ocurrió un error al enviar tu solicitud. Por favor, inténtalo nuevamente.';
-            alert('Error: ' + mensajeError);
-          },
-        });
+      this.financiacionService.solicitarFinanciamiento(formData).subscribe({
+        next: (response) => {
+          console.log('Financiamiento solicitado con éxito', response);
+
+          // Mostrar mensaje de éxito al usuario
+          const mensaje = response.email_enviado
+            ? '¡Solicitud enviada exitosamente! Te hemos enviado un correo de confirmación con todos los detalles.'
+            : '¡Solicitud enviada exitosamente! Nos contactaremos contigo pronto.';
+
+          alert(mensaje);
+
+          // Limpiar el formulario
+          this.financiacionForm.reset();
+          this.modelosFiltrados = [];
+          this.provinciasFiltradas = [];
+          this.distritosFiltrados = [];
+
+          // Resetear valores por defecto
+          this.financiacionForm.patchValue({
+            tipo_documento: 'DNI',
+          });
+        },
+        error: (error) => {
+          console.error('Error al solicitar financiamiento:', error);
+
+          const mensajeError =
+            error.error?.message ||
+            'Ocurrió un error al enviar tu solicitud. Por favor, inténtalo nuevamente.';
+          alert('Error: ' + mensajeError);
+        },
+      });
     }
   }
 }

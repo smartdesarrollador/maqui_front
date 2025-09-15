@@ -23,7 +23,7 @@ export class SectionTiposMotosComponent {
       ruta: '/motos/pisteras',
     },
     {
-      nombre: 'CUSTOM',
+      nombre: 'DEPORTIVAS',
       imagen: 'assets/images/section-tipos-motos/custom.jpg',
       ruta: '/motos/custom',
     },
