@@ -7,7 +7,7 @@ import {
   TipoMoto,
 } from '../../../services/services_motos/motos-por-servicio.service';
 import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-motos-por-tipo',
@@ -20,6 +20,7 @@ export class MotosPorTipoComponent implements OnInit {
   protected readonly baseUrl = environment.urlRaiz;
   private motoService = inject(MotosPorServicioService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   motos: Moto[] = [];
   tiposMotos: TipoMoto[] = [];
@@ -28,11 +29,23 @@ export class MotosPorTipoComponent implements OnInit {
   totalPages = 0;
   itemsPerPage = 8;
   selectedTipo = '';
+  selectedTipoId = '';
   isLoading = false;
 
   ngOnInit(): void {
     this.loadTiposMotos();
-    this.loadMotos();
+
+    // Obtener el parámetro de consulta 'tipo' de la URL
+    this.route.queryParams.subscribe(params => {
+      if (params['tipo']) {
+        this.selectedTipoId = params['tipo'];
+        this.selectedTipo = params['tipo'];
+      } else {
+        this.selectedTipoId = '';
+        this.selectedTipo = '';
+      }
+      this.loadMotos();
+    });
   }
 
   loadTiposMotos(): void {
@@ -80,8 +93,22 @@ export class MotosPorTipoComponent implements OnInit {
 
   onTipoChange(tipo: string): void {
     this.selectedTipo = tipo;
+    this.selectedTipoId = tipo;
     this.currentPage = 1;
     this.loadMotos();
+  }
+
+  onTipoChangeById(tipoId: string): void {
+    this.selectedTipoId = tipoId;
+    this.selectedTipo = tipoId;
+    this.currentPage = 1;
+
+    // Actualizar la URL con el nuevo parámetro
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: tipoId ? { tipo: tipoId } : {},
+      queryParamsHandling: 'merge'
+    });
   }
 
   onPageChange(page: number): void {

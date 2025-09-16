@@ -192,7 +192,8 @@
     <div class="flex flex-wrap gap-6 border-b mb-8">
       @for (tipo of tiposMotos(); track tipo.id) {
       <button
-        routerLink="/motos-por-tipo"
+        [routerLink]="['/motos-por-tipo']"
+        [queryParams]="{tipo: tipo.id}"
         (mouseenter)="seleccionarTipo(tipo.nombre)"
         [class.text-blue-500]="tipoSeleccionado() === tipo.nombre"
         [class.border-blue-500]="tipoSeleccionado() === tipo.nombre"

@@ -4,11 +4,15 @@
     <ul class="flex flex-wrap gap-4 justify-center">
       <li>
         <button
-          class="px-4 py-2 rounded-lg transition-colors duration-200"
-          [class.bg-blue-600]="selectedTipo === ''"
-          [class.text-white]="selectedTipo === ''"
-          [class.bg-gray-100]="selectedTipo !== ''"
-          (click)="onTipoChange('')"
+          class="px-4 py-2 rounded-lg transition-colors duration-200 font-medium border-2"
+          [class.bg-blue-600]="selectedTipoId === ''"
+          [class.text-white]="selectedTipoId === ''"
+          [class.border-blue-600]="selectedTipoId === ''"
+          [class.bg-white]="selectedTipoId !== ''"
+          [class.text-gray-700]="selectedTipoId !== ''"
+          [class.border-gray-200]="selectedTipoId !== ''"
+          [class.hover:border-blue-300]="selectedTipoId !== ''"
+          (click)="onTipoChangeById('')"
         >
           TODAS
         </button>
@@ -16,11 +20,15 @@
       @for (tipo of tiposMotos; track tipo.id_tipo_moto) {
       <li>
         <button
-          class="px-4 py-2 rounded-lg transition-colors duration-200"
-          [class.bg-blue-600]="selectedTipo === tipo.nombre"
-          [class.text-white]="selectedTipo === tipo.nombre"
-          [class.bg-gray-100]="selectedTipo !== tipo.nombre"
-          (click)="onTipoChange(tipo.nombre)"
+          class="px-4 py-2 rounded-lg transition-colors duration-200 font-medium border-2"
+          [class.bg-blue-600]="selectedTipoId === tipo.id_tipo_moto.toString()"
+          [class.text-white]="selectedTipoId === tipo.id_tipo_moto.toString()"
+          [class.border-blue-600]="selectedTipoId === tipo.id_tipo_moto.toString()"
+          [class.bg-white]="selectedTipoId !== tipo.id_tipo_moto.toString()"
+          [class.text-gray-700]="selectedTipoId !== tipo.id_tipo_moto.toString()"
+          [class.border-gray-200]="selectedTipoId !== tipo.id_tipo_moto.toString()"
+          [class.hover:border-blue-300]="selectedTipoId !== tipo.id_tipo_moto.toString()"
+          (click)="onTipoChangeById(tipo.id_tipo_moto.toString())"
         >
           {{ tipo.nombre }}
           <span class="text-sm ml-1">({{ tipo.motos_count }})</span>

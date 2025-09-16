@@ -67,6 +67,9 @@ export class MotosPorServicioService {
     let httpParams = new HttpParams();
 
     // Agregar parámetros si existen
+    if (params.tipo) {
+      httpParams = httpParams.set('tipo', params.tipo);
+    }
     if (params.search) {
       httpParams = httpParams.set('search', params.search);
     }
@@ -83,10 +86,8 @@ export class MotosPorServicioService {
       httpParams = httpParams.set('sort_order', params.sort_order);
     }
 
-    // Si hay tipo, usar la URL con tipo, sino usar la URL base
-    const url = params.tipo ? `${this.baseUrl}/${params.tipo}` : this.baseUrl;
-
-    return this.http.get<MotoResponse>(url, { params: httpParams });
+    // Usar la URL base y enviar tipo como query parameter
+    return this.http.get<MotoResponse>(this.baseUrl, { params: httpParams });
   }
 
   /**
