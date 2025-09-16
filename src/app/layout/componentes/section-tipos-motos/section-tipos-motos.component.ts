@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MotosPorServicioService } from '../../../services/services_motos/motos-por-servicio.service';
 
 interface TipoMoto {
+  id_tipo_moto: number;
   nombre: string;
-  imagen: string;
-  ruta: string;
+  descripcion: string;
+  motos_count: number;
+  imagen?: string;
 }
 
 @Component({
@@ -15,40 +18,45 @@ interface TipoMoto {
   templateUrl: './section-tipos-motos.component.html',
   styleUrl: './section-tipos-motos.component.css',
 })
-export class SectionTiposMotosComponent {
-  readonly tiposMotos: TipoMoto[] = [
-    {
-      nombre: 'PISTERAS',
-      imagen: 'assets/images/section-tipos-motos/pistera.jpg',
-      ruta: '/motos/pisteras',
-    },
-    {
-      nombre: 'DEPORTIVAS',
-      imagen: 'assets/images/section-tipos-motos/custom.jpg',
-      ruta: '/motos/custom',
-    },
-    {
-      nombre: 'TODO TERRENO',
-      imagen: 'assets/images/section-tipos-motos/todo_terreno.jpg',
-      ruta: '/motos/todo-terreno',
-    },
+export class SectionTiposMotosComponent implements OnInit {
+  private motoService = inject(MotosPorServicioService);
 
-    {
-      nombre: 'URBANA',
-      imagen: 'assets/images/section-tipos-motos/ciudad.jpg',
-      ruta: '/motos/urbana',
-    },
+  tiposMotos: TipoMoto[] = [];
+  isLoading = false;
 
-    {
-      nombre: 'UTILITARIA',
-      imagen: 'assets/images/section-tipos-motos/utilitaria.jpg',
-      ruta: '/motos/utilitaria',
-    },
+  // Mapeo de imágenes por nombre de tipo
+  private imagenesMap: { [key: string]: string } = {
+    'Pisteras': 'assets/images/section-tipos-motos/pistera.jpg',
+    'Deportiva': 'assets/images/section-tipos-motos/custom.jpg',
+    'Todo Terreno': 'assets/images/section-tipos-motos/todo_terreno.jpg',
+    'Eléctrica': 'assets/images/section-tipos-motos/ciudad.jpg',
+    'Utilitarias': 'assets/images/section-tipos-motos/utilitaria.jpg',
+    'Scooter': 'assets/images/section-tipos-motos/scooter.jpg',
+    'Doble Propósito': 'assets/images/section-tipos-motos/todo_terreno.jpg'
+  };
 
-    {
-      nombre: 'SCOOTER',
-      imagen: 'assets/images/section-tipos-motos/scooter.jpg',
-      ruta: '/motos/scooter',
-    },
-  ];
+  ngOnInit(): void {
+    this.loadTiposMotos();
+  }
+
+  loadTiposMotos(): void {
+    this.isLoading = true;
+    this.motoService.getTiposMotos().subscribe({
+      next: (response) => {
+        this.tiposMotos = response.data.map(tipo => ({
+          ...tipo,
+          imagen: this.imagenesMap[tipo.nombre] || 'assets/images/section-tipos-motos/pistera.jpg'
+        }));
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error cargando tipos de motos:', error);
+        this.isLoading = false;
+      },
+    });
+  }
+
+  getTipoMotoUrl(tipoId: number): string {
+    return `/motos-por-tipo?tipo=${tipoId}`;
+  }
 }

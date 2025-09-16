@@ -4,26 +4,39 @@
   </h2>
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-    @for (tipo of tiposMotos; track tipo.nombre) {
-    <!-- <a
-      [routerLink]="tipo.ruta"
-      class="flex flex-col items-center group hover:scale-105 transition-transform duration-300"
-    > -->
-    <a
-      [routerLink]="'/motos-por-tipo'"
-      class="flex flex-col items-center group hover:scale-105 transition-transform duration-300"
-    >
-      <div
-        class="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center mb-4 overflow-hidden"
-      >
-        <img
-          [src]="tipo.imagen"
-          [alt]="tipo.nombre"
-          class="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300"
-        />
-      </div>
-      <h3 class="text-lg font-semibold text-center">{{ tipo.nombre }}</h3>
-    </a>
+    @if (isLoading) {
+      <!-- Loading state -->
+      @for (item of [1,2,3,4,5,6]; track item) {
+        <div class="flex flex-col items-center animate-pulse">
+          <div class="w-32 h-32 rounded-full bg-gray-300 mb-4"></div>
+          <div class="h-4 bg-gray-300 rounded w-20"></div>
+        </div>
+      }
+    } @else {
+      @for (tipo of tiposMotos; track tipo.id_tipo_moto) {
+        <a
+          [routerLink]="['/motos-por-tipo']"
+          [queryParams]="{tipo: tipo.id_tipo_moto}"
+          class="flex flex-col items-center group hover:scale-105 transition-transform duration-300 cursor-pointer"
+        >
+          <div
+            class="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center mb-4 overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+          >
+            <img
+              [src]="tipo.imagen"
+              [alt]="tipo.nombre"
+              class="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <h3 class="text-lg font-semibold text-center group-hover:text-blue-600 transition-colors duration-300">
+            {{ tipo.nombre }}
+          </h3>
+          @if (tipo.motos_count > 0) {
+            <p class="text-sm text-gray-500 mt-1">{{ tipo.motos_count }} modelos</p>
+          }
+        </a>
+      }
     }
   </div>
 </section>
