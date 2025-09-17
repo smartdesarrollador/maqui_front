@@ -1,14 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MotosPorServicioService } from '../../../services/services_motos/motos-por-servicio.service';
+import { MotosPorServicioService, TipoMoto } from '../../../services/services_motos/motos-por-servicio.service';
+import { environment } from '../../../../environments/environment';
 
-interface TipoMoto {
-  id_tipo_moto: number;
-  nombre: string;
-  descripcion: string;
-  motos_count: number;
-  imagen?: string;
+interface TipoMotoExtended extends TipoMoto {
+  imagenUrl?: string;
 }
 
 @Component({
@@ -20,20 +17,10 @@ interface TipoMoto {
 })
 export class SectionTiposMotosComponent implements OnInit {
   private motoService = inject(MotosPorServicioService);
+  protected readonly baseUrl = environment.urlRaiz;
 
-  tiposMotos: TipoMoto[] = [];
+  tiposMotos: TipoMotoExtended[] = [];
   isLoading = false;
-
-  // Mapeo de imágenes por nombre de tipo
-  private imagenesMap: { [key: string]: string } = {
-    'Pisteras': 'assets/images/section-tipos-motos/pistera.jpg',
-    'Deportiva': 'assets/images/section-tipos-motos/custom.jpg',
-    'Todo Terreno': 'assets/images/section-tipos-motos/todo_terreno.jpg',
-    'Eléctrica': 'assets/images/section-tipos-motos/ciudad.jpg',
-    'Utilitarias': 'assets/images/section-tipos-motos/utilitaria.jpg',
-    'Scooter': 'assets/images/section-tipos-motos/scooter.jpg',
-    'Doble Propósito': 'assets/images/section-tipos-motos/todo_terreno.jpg'
-  };
 
   ngOnInit(): void {
     this.loadTiposMotos();
@@ -43,9 +30,11 @@ export class SectionTiposMotosComponent implements OnInit {
     this.isLoading = true;
     this.motoService.getTiposMotos().subscribe({
       next: (response) => {
-        this.tiposMotos = response.data.map(tipo => ({
+        this.tiposMotos = response.data.map((tipo): TipoMotoExtended => ({
           ...tipo,
-          imagen: this.imagenesMap[tipo.nombre] || 'assets/images/section-tipos-motos/pistera.jpg'
+          imagenUrl: tipo.imagen
+            ? `${this.baseUrl}/assets/imagen/tipo_motos/${tipo.imagen}`
+            : `${this.baseUrl}/assets/imagen/tipo_motos/default.png`
         }));
         this.isLoading = false;
       },

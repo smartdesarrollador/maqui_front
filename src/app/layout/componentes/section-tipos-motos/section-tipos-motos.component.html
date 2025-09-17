@@ -23,10 +23,11 @@
             class="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center mb-4 overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300"
           >
             <img
-              [src]="tipo.imagen"
+              [src]="tipo.imagenUrl"
               [alt]="tipo.nombre"
               class="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300"
               loading="lazy"
+              (error)="$event.target.src = baseUrl + '/assets/imagen/tipo_motos/default.png'"
             />
           </div>
           <h3 class="text-lg font-semibold text-center group-hover:text-blue-600 transition-colors duration-300">

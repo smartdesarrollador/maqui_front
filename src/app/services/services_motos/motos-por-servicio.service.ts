@@ -8,6 +8,7 @@ export interface TipoMoto {
   nombre: string;
   descripcion: string;
   motos_count: number;
+  imagen?: string;
 }
 
 export interface MotoResponse {
