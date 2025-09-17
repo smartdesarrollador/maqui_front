@@ -21,7 +21,7 @@ export class SaludoInfoComponent {
     {
       titulo: 'FINANCIA TU MOTO AQUÍ',
       icono: 'assets/iconos/info/icono1.png',
-      ruta: '/formulario-financiacion',
+      ruta: '/',
     },
     {
       titulo: 'GARANTÍA Y POST VENTA',
