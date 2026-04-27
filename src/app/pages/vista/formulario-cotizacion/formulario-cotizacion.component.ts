@@ -186,11 +186,8 @@ export class FormularioCotizacionComponent {
 
     // Configurar listener para cambios en tipo de moto
     this.formularioCotizacion.get('tipo_moto')?.valueChanges.subscribe(tipoMotoId => {
-      if (this.tiposMotos.length > 0 && this.modelos.length > 0) {
-        this.filtrarModelosPorTipo(tipoMotoId);
-        // Limpiar modelo seleccionado cuando cambie el tipo
-        this.formularioCotizacion.get('modelo')?.setValue('');
-      }
+      this.filtrarModelosPorTipo(tipoMotoId);
+      this.formularioCotizacion.get('modelo')?.setValue('');
     });
 
     // Configurar listener para cambios en departamento
@@ -231,7 +228,7 @@ export class FormularioCotizacionComponent {
     this.motosService.getModelos().subscribe({
       next: (modelos) => {
         this.modelos = modelos || [];
-        this.modelosFiltrados = modelos || [];
+        this.modelosFiltrados = [];
       },
       error: (error) => {
         console.error('Error al cargar modelos:', error);
@@ -246,7 +243,7 @@ export class FormularioCotizacionComponent {
    */
   private filtrarModelosPorTipo(tipoMotoId: string): void {
     if (!tipoMotoId) {
-      this.modelosFiltrados = this.modelos;
+      this.modelosFiltrados = [];
       return;
     }
 
@@ -336,7 +333,7 @@ export class FormularioCotizacionComponent {
       
       // Convertir ID de modelo a nombre
       if (formData.modelo) {
-        const modelo = this.modelosFiltrados.find(m => m.id_modelo.toString() === formData.modelo);
+        const modelo = this.modelos.find(m => m.id_modelo.toString() === formData.modelo);
         formData.modelo = modelo?.nombre || formData.modelo;
       }
 
@@ -352,11 +349,11 @@ export class FormularioCotizacionComponent {
         }
         this.mensajeExito = mensaje;
         this.formularioCotizacion.reset();
-        
+
         // Limpiar arrays filtrados
         this.provinciasFiltradas = [];
         this.distritosFiltrados = [];
-        this.modelosFiltrados = this.modelos;
+        this.modelosFiltrados = [];
       } else {
         this.mensajeError = response?.message || 'Error al enviar la cotización';
       }
